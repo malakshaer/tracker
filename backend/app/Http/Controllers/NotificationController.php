@@ -55,4 +55,23 @@ class NotificationController extends Controller
 
         return response()->json('Message is read');
     }
+
+    //Delete Notification
+    public function deleteNotification(Request $request)
+    {
+        $this->database
+            ->getReference('notifications/' . $request['id'])
+            ->remove();
+
+        return response()->json('Notification deleted');
+    }
+
+    //Delete all Notifications
+    public function deleteAllNotifications()
+    {
+        $this->database->getReference('notifications/')
+            ->remove();
+
+        return response()->json('All Notifications Deleted');
+    }
 }
