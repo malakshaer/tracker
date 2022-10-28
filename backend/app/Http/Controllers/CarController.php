@@ -28,4 +28,16 @@ class CarController extends Controller
 
         return response()->json('Car has been created successfully');
     }
+
+    //Change Car status
+    public function changeCarStatus(Request $request)
+    {
+        $this->database
+            ->getReference('cars/' . $request['id'])
+            ->update([
+                'status' => "Active",
+            ]);
+
+        return response()->json('Car is Active now');
+    }
 }
