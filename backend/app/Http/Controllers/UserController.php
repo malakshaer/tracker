@@ -27,4 +27,34 @@ class UserController extends Controller
     {
         return User::where("id", $id)->get();
     }
+
+
+
+    //Edit or update user
+    public function editUser(Request $request)
+    {
+
+        $user = User::where('id', $request->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'profile_image' => $request->profile_image
+        ]);
+
+        if ($request->encryptedImage) {
+            $image_id = time();
+            $image = base64_decode($request->encryptedImage);
+            $path = storage_path('images\\')  . $image_id . "." . $request->extension;
+            file_put_contents($path, $image);
+            $user->image = $image_id . "." . $request->extension;
+        }
+
+
+        return response()->json(
+            [
+                'status' => 200,
+                'message' => 'Profile Updated'
+            ]
+        );
+    }
 }
