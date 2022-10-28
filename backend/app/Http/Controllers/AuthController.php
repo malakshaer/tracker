@@ -6,46 +6,137 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Dotenv\Util\Str;
+use Dotenv\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Stevebauman\Location\Facades\Location;
 
 class AuthController extends Controller
 {
 
-    public function __construct()
+    public function login(Request $request)
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
 
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->only('email', 'password');
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $token = Auth::attempt($credentials);
+
+        if (!$token) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ], 401);
         }
 
-        return $this->respondWithToken($token);
+        $currentUserInfo = Location::get($_SERVER['REMOTE_ADDR']);
+        $user = User::find(Auth::user()->id);
+
+        if ($currentUserInfo) {
+            $user->latitude = $currentUserInfo->latitude;
+            $user->longitude = $currentUserInfo->longitude;
+            $user->save();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'user' => Auth::user(),
+            'authorization' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
     }
+
 
     public function register(Request $request)
     {
-        $confirmation_code = String::random(15);
+        $confirmation_code = rand(100, 1000);
 
-        User::create([
+        $request->validate([
+            'name' => 'required|string|min:3|max:100',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'confirmation_code' => $confirmation_code,
-            'profile_img' => $request->profile_img
+            'profile_image' => $request->profile_image
         ]);
 
-        // Mail::send('auth.emails.user-confirmation', ['name' => $name, 'confirmation_code' => $user['confirmation_code']], function ($message) use ($email, $name) {
-        //     $message->from('mymail@gmail.com', 'Name Family')->to($email, $name)->subject('Confirm email');
-        // });
+        if ($user->save()) {
+            $token = Auth::login($user);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User created successfully',
+                'user' => $user,
+                'authorization' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ]);
+        }
+    }
 
-        return response()->json([
-            "status" => "success",
-            "data" => "User successfully created"
-        ]);
+    // public function register(Request $request)
+    // {
+
+    //     $request->validate([
+    //         'name' => 'required|string|min:3|max:30',
+    //         'email' => 'required|string|email|max:100|unique:users',
+    //         'password' => 'required|string|confirmed|min:6',
+    //     ]);
+
+    //     if ($request->fails()) {
+    //         return response()->json($request->errors()->toJson(), 400);
+    //     }
+
+    //     $user = User::create(array_merge(
+    //         $request->validated(),
+    //         ['password' => bcrypt($request->password)],
+    //     ));
+
+    //     $token = JWTAuth::fromUser($user);
+
+    //     dd($this->sendNotification());
+
+    //     $user->$this->sendNotification();
+
+    //     return response()->json([
+    //         'message' => 'successfully created',
+    //         'user' => $user,
+    //         'token' => $token,
+    //     ], 201);
+    // }
+
+
+
+    public function checkCode(Request $request)
+    {
+        $data = $request->all();
+        $usersCount = User::where('confirmation_code', $data['confirmation_code'])->count();
+        if ($usersCount > 0) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $data = $request->all();
+        $usersCount = User::where('email', $data['email'])->count();
+        if ($usersCount > 0) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
     }
 
     public function me()
@@ -53,41 +144,34 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+
+    // protected function respondWithToken($token)
+    // {
+    //     return response()->json([
+    //         'access_token' => $token,
+    //         'token_type' => 'bearer',
+    //         'expires_in' => auth()->factory()->getTTL() * 60
+    //     ]);
+    // }
+
     public function logout()
     {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        Auth::logout();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully logged out',
+        ]);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'status' => 'success',
+            'user' => Auth::user(),
+            'authorization' => [
+                'token' => Auth::refresh(),
+                'type' => 'bearer',
+            ]
         ]);
     }
 }
