@@ -56,4 +56,18 @@ class CarController extends Controller
             ->getReference('cars/' . $request['id'])
             ->getValue());
     }
+
+    //Edit or update Car Details
+    public function editCar(Request $request)
+    {
+        $this->database->getReference('cars/' . $request['id'])
+            ->update([
+                'name' => $request['name'],
+                'longitude' => $request['longitude'],
+                'latitude' => $request['latitude']
+
+            ]);
+
+        return response()->json('Car has been updated');
+    }
 }
