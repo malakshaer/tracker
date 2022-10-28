@@ -28,8 +28,6 @@ class UserController extends Controller
         return User::where("id", $id)->get();
     }
 
-
-
     //Edit or update user
     public function editUser(Request $request)
     {
@@ -56,5 +54,13 @@ class UserController extends Controller
                 'message' => 'Profile Updated'
             ]
         );
+    }
+
+    //Delete User
+    public function deleteAccount($id)
+    {
+        User::where('id', $id)->delete();
+
+        return response()->json('Account has been deleted');
     }
 }
