@@ -43,4 +43,16 @@ class NotificationController extends Controller
             ->getReference('notifications/' . $request['id'])
             ->getValue());
     }
+
+    //Read Notification
+    public function readNotification(Request $request)
+    {
+        $this->database
+            ->getReference('notifications/' . $request['id'])
+            ->update([
+                'is_read' => 1,
+            ]);
+
+        return response()->json('Message is read');
+    }
 }
