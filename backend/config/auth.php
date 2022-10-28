@@ -72,6 +72,13 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'providers' => [
+            'firebaseUser' => [
+                'driver' => 'firebaseuserprovider',
+                'model' => App\User::class,
+            ],
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
