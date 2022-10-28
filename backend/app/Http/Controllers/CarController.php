@@ -40,4 +40,12 @@ class CarController extends Controller
 
         return response()->json('Car is Active now');
     }
+
+    //Get All Cars of the User
+    public function getAllCars()
+    {
+        return response()->json($this->database
+            ->getReference('cars/')
+            ->getValue());
+    }
 }
