@@ -28,4 +28,19 @@ class NotificationController extends Controller
 
         return response()->json('Message sent successfully');
     }
+
+    //Show All Notifications
+    public function getAllNotifications()
+    {
+        return response()->json($this->database->getReference('notifications/')
+            ->getValue());
+    }
+
+    //Show Single Notification
+    public function getSingleNotification(Request $request)
+    {
+        return response()->json($this->database
+            ->getReference('notifications/' . $request['id'])
+            ->getValue());
+    }
 }
