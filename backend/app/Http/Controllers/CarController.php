@@ -48,4 +48,12 @@ class CarController extends Controller
             ->getReference('cars/')
             ->getValue());
     }
+
+    //Get single car details
+    public function getCar(Request $request)
+    {
+        return response()->json($this->database
+            ->getReference('cars/' . $request['id'])
+            ->getValue());
+    }
 }
