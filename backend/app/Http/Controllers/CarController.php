@@ -70,4 +70,24 @@ class CarController extends Controller
 
         return response()->json('Car has been updated');
     }
+
+
+    //Delete Car
+    public function deleteCar(Request $request)
+    {
+        $this->database
+            ->getReference('cars/' . $request['id'])
+            ->remove();
+
+        return response()->json('car has been deleted');
+    }
+
+    //Delete all cars
+    public function deleteAllCars()
+    {
+        $this->database->getReference('cars/')
+            ->remove();
+
+        return response()->json('All Cars Deleted');
+    }
 }
