@@ -39,10 +39,15 @@ class UserController extends Controller
             'profile_image' => $request->profile_image
         ]);
 
+        // $imageName = time().'.'.$request->profile_image->extension();
+
+        // Public Folder
+        // $request->profile_image->move(public_path('images'), $imageName);
+
         if ($request->encryptedImage) {
             $image_id = time();
             $image = base64_decode($request->encryptedImage);
-            $path = storage_path('images\\')  . $image_id . "." . $request->extension;
+            $path = public_path('./storage/app/public')  . $image_id . "." . $request->extension;
             file_put_contents($path, $image);
             $user->image = $image_id . "." . $request->extension;
         }
