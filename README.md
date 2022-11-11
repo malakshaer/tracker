@@ -74,7 +74,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 <br><br>
 <img src="./readme/title6.svg"/>
 
-> To get a local copy up and running follow these simple steps.
+> To get a local copy and run the application follow these simple steps:
 
 ### Prerequisites
 
