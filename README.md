@@ -33,11 +33,11 @@
 | --------------------------------- | -------------------------------- |
 | <img src="./readme/landing.png"/> | <img src="./readme/login.png" /> |
 
-| Register                                     | MapScreen                            |
+| Register                                     | Map Screen                           |
 | -------------------------------------------- | ------------------------------------ |
 | <img src="./readme/register.png" width=161/> | <img src="./readme/mapScreen.png" /> |
 
-| SettingsScreen                               | Popup                                     |
+| Settings Screen                              | Settings Popup                            |
 | -------------------------------------------- | ----------------------------------------- |
 | <img src="./readme/settings.png" width=185/> | <img src="./readme/settings-popup.png" /> |
 
@@ -63,7 +63,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -------------------------------------- | ------------------------------------ |
 | <img src="./readme/real-landing.png"/> | <img src="./readme/real-login.png"/> |
 
-| Register                                | Home/Search                        |
+| Register                                | Map Screen                         |
 | --------------------------------------- | ---------------------------------- |
 | <img src="./readme/real-register.png"/> | <img src="./readme/real-map.png"/> |
 
