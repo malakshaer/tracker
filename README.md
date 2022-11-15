@@ -21,7 +21,7 @@
 - As a User, I wants to locate my car, So that I find it faster.
 - As a User, I wants to track my car any time, So I can know if it is being robbed.
 - As a User, I wants to get notification if my car is active, So I can know if it is being robbed.
-- As a User, I want to see the destination of my car if it has been robbed, So i can find it easily.
+- As a User, I want to see the path of my car if it has been robbed, So i can find it easily.
 
 <br><br>
 
