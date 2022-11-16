@@ -31,3 +31,32 @@ const LandingScreen = ({ navigation }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#032955",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  logoImage: {
+    paddingTop: 400,
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#1648AD",
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: 5,
+  },
+  appButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+  },
+});
+
+export default LandingScreen;
