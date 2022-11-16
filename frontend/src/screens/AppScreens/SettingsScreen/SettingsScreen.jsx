@@ -10,6 +10,16 @@ import { deleteAllCars } from "../../../api/carApi";
 import { deleteAccount } from "../../../api/userApi";
 
 const SettingsScreen = ({ navigation }) => {
+  const [visible, setVisible] = React.useState(false);
+  const [visibleVehicle, setVisibleVehicle] = React.useState(false);
+  const [visibleNotification, setVisibleNotification] = React.useState(false);
+  const [visibleSendNotification, setVisibleSendNotification] =
+    React.useState(false);
+
+  const handleNavigation = () => {
+    navigation.navigate(LandingScreen);
+  };
+
   return (
     <View style={styles.container}>
       <SettingsComponent
