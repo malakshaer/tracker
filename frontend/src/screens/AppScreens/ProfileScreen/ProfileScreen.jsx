@@ -135,6 +135,65 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       </View>
     </ModalPopup>
+
+    <ModalPopup visible={visibleAddVehicle}>
+      <View style={styles.popUpContainer}>
+        <View style={styles.headerSendNotification}>
+          <TouchableOpacity onPress={() => setVisibleAddVehicle(false)}>
+            <Image
+              source={require("../../../../assets/x.png")}
+              style={{ height: 20, width: 20 }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.imageProfile}>
+          <TouchableOpacity>
+            <Text
+              style={{ color: "#032955", fontSize: 20, fontWeight: "bold" }}
+            >
+              Add new Vehicle
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.option}>
+          <TextInput
+            style={styles.textPopUp}
+            placeholder="Car Name/Type"
+          ></TextInput>
+          <Icon name={"add"} size={30} color={"#032955"} />
+        </View>
+        <View style={styles.option}>
+          <TextInput style={styles.textPopUp} placeholder="PIN"></TextInput>
+          <Icon name={"add"} size={30} color={"#032955"} />
+        </View>
+        {/* <View style={styles.default}>
+            <TouchableOpacity>
+              <Icon
+                name={iconName}
+                size={30}
+                color={"#032955"}
+                onPress={() => {
+                  if (iconName == "checkmark-circle-outline") {
+                    setIconName("checkmark-circle");
+                  }
+                  if (iconName == "checkmark-circle") {
+                    setIconName("checkmark-circle-outline");
+                  }
+                }}
+              />
+            </TouchableOpacity>
+            <Text>Make this my default vehicle</Text>
+          </View> */}
+
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => createNewCar()}
+          style={styles.appButtonContainer}
+        >
+          <Text style={styles.appButtonText}>Add</Text>
+        </TouchableOpacity>
+      </View>
+    </ModalPopup>
   </View>;
 };
 
