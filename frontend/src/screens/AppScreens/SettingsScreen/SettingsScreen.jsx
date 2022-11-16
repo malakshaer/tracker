@@ -1,3 +1,14 @@
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import SettingsComponent from "../../../components/SettingsComponent/SettingsComponent";
+import ModalPopup from "../../../components/Modal/Modal";
+import { TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import LandingScreen from "../../LandingScreen/LandingScreen";
+import { deleteAllNotifications } from "../../../api/notificationsApi";
+import { deleteAllCars } from "../../../api/carApi";
+import { deleteAccount } from "../../../api/userApi";
+
 const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
