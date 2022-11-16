@@ -41,7 +41,29 @@ function TabStack() {
             //return any component
             return <Icon name={iconName} size={35} color={color} />;
           },
+          tabBarStyle: {
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            backgroundColor: "#032955",
+            height: 70,
+          },
+          headerStyle: {
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            backgroundColor: "#032955",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 24,
+          },
+          tabBarHideOnKeyboard: "true",
         })}
+        tabBarOptions={{
+          activeTintColor: "#fff",
+          inactiveTintColor: "grey",
+          labelStyle: { paddingBottom: 5, fontSize: 12, display: "none" },
+        }}
       >
         <Tab.Screen name={MapName} component={MapScreen} />
         <Tab.Screen name={ProfileName} component={ProfileScreen} />
