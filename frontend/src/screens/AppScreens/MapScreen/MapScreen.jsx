@@ -1,3 +1,30 @@
+import React, { useState, useRef, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+  Platform,
+} from "react-native";
+import MapView, { Marker, Callout, AnimatedRegion } from "react-native-maps";
+import { GOOGLE_MAP_KEY } from "../../../constants/googleMapKey";
+import imagePath from "../../../constants/imagePath";
+import MapViewDirections from "react-native-maps-directions";
+import Loader from "../../../components/Loader/Loader";
+import { locationPermission, getCurrentLocation } from "./helperFunction";
+import logoMarker from "../../../../assets/logo-marker.png";
+import { sendNewNotification } from "../../../api/notificationsApi";
+import sendNotification from "../NotificationScreen/NotificationScreen";
+import locate from "../../../../assets/locate.png";
+import * as Location from "expo-location";
+
+const screen = Dimensions.get("window");
+const ASPECT_RATIO = screen.width / screen.height;
+const LATITUDE_DELTA = 0.04;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const MapScreen = () => {
   return (
     <View style={styles.container}>
