@@ -54,4 +54,51 @@ const LogInScreen = ({ navigation }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    backgroundColor: "#032955",
+    alignItems: "center",
+  },
+  titleText: {
+    fontSize: 26,
+    color: "#fff",
+    fontWeight: "bold",
+    marginBottom: 30,
+    marginTop: 30,
+  },
+  input: {
+    height: 50,
+    width: 250,
+    marginVertical: 10,
+    backgroundColor: "#032955",
+    borderBottomColor: "#fff",
+    borderBottomWidth: 1,
+    paddingHorizontal: 10,
+    fontSize: 20,
+    color: "#C0BCBC",
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#1648AD",
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: 20,
+  },
+  appButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    paddingHorizontal: 20,
+  },
+  navText: {
+    color: "#1648AD",
+    fontSize: 18,
+  },
+});
+
 export default LogInScreen;
