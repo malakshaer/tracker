@@ -96,6 +96,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
   <br> _[iOS App Store](https://apps.apple.com/app/expo-go/id982107779) - iOS 11 and greater._
 
 - [Android Studio](https://developer.android.com/) or [BlueStacks](bluestacks.com) or any tool that run an emulator on your PC.
+  <br>(you can run it on web browser)
 
 ### Installation
 
