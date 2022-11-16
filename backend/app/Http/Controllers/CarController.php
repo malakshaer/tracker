@@ -20,10 +20,11 @@ class CarController extends Controller
         $this->database
             ->getReference('cars/')
             ->push([
-                'name' => $request['name'],
+                'carName' => $request['carName'],
                 'status' => 'Not Active',
                 'longitude' => $request['longitude'],
                 'latitude' => $request['latitude'],
+                'pin' => $request['pin'],
             ])->getKey();
 
         return response()->json('Car has been created successfully');
@@ -62,9 +63,10 @@ class CarController extends Controller
     {
         $this->database->getReference('cars/' . $request['id'])
             ->update([
-                'name' => $request['name'],
+                'carName' => $request['carName'],
                 'longitude' => $request['longitude'],
-                'latitude' => $request['latitude']
+                'latitude' => $request['latitude'],
+                'pin' => $request['pin'],
 
             ]);
 
