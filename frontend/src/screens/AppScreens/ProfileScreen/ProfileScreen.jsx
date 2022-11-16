@@ -194,6 +194,72 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       </View>
     </ModalPopup>
+
+    <ModalPopup visible={visibleEditVehicle}>
+      <View style={styles.popUpContainer}>
+        <View style={styles.headerSendNotification}>
+          <TouchableOpacity onPress={() => setVisibleEditVehicle(false)}>
+            <Image
+              source={require("../../../../assets/x.png")}
+              style={{ height: 20, width: 20 }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.imageProfile}>
+          <TouchableOpacity>
+            <Text
+              style={{ color: "#032955", fontSize: 20, fontWeight: "bold" }}
+            >
+              Edit Your Vehicle
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.option}>
+          <TextInput
+            style={styles.textPopUp}
+            placeholder="Car Name/Type"
+          ></TextInput>
+          <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
+        </View>
+        <View style={styles.option}>
+          <TextInput style={styles.textPopUp} placeholder="PIN"></TextInput>
+          <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
+        </View>
+        <View style={styles.default}>
+          <TouchableOpacity>
+            <Icon
+              name={iconName}
+              size={30}
+              color={"#032955"}
+              onPress={() => {
+                if (iconName == "checkmark-circle-outline") {
+                  setIconName("checkmark-circle");
+                }
+                if (iconName == "checkmark-circle") {
+                  setIconName("checkmark-circle-outline");
+                }
+              }}
+            />
+          </TouchableOpacity>
+          <Text>Make this my default vehicle</Text>
+        </View>
+
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => editCar()}
+          style={styles.appButtonContainer}
+        >
+          <Text style={styles.appButtonText}>Save</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => deleteCar()}
+          style={styles.deleteCarButton}
+        >
+          <Text style={styles.appButtonText}>Delete Car</Text>
+        </TouchableOpacity>
+      </View>
+    </ModalPopup>
   </View>;
 };
 
