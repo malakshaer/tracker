@@ -20,6 +20,7 @@ export const getCurrentLocation = () =>
       { enableHighAccuracy: true, timeout: 900000000, maximumAge: 10000 }
     );
   });
+
 export const locationPermission = () =>
   new Promise(async (resolve, reject) => {
     if (Platform.OS === "ios") {
