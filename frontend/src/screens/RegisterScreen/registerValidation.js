@@ -24,6 +24,7 @@ export default function validateInput(credentials) {
   }
   return "valid";
 }
+
 export const RegisterNewUser = async (credentials) => {
   try {
     const res = await fetch(`${BASE_URL}/register`, {
@@ -39,3 +40,14 @@ export const RegisterNewUser = async (credentials) => {
     console.log({ err });
   }
 };
+
+function handleResponse(data) {
+  if (data?.email) {
+    Alert.alert("Invalid Email", "Email has already been taken");
+    return;
+  }
+  if (data?.message) {
+    Alert.alert("Success", "User successfully registered");
+    return "success";
+  }
+}
