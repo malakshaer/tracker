@@ -27,3 +27,23 @@ export const getCar = async (data) => {
 
   return res;
 };
+
+export const createNewCar = async (name, pin) => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.post(
+    `${BASE_URL}/createNewCar`,
+    {
+      name,
+      pin,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${user?.access_token}`,
+      },
+    }
+  );
+
+  return res;
+};
