@@ -90,6 +90,51 @@ const ProfileScreen = () => {
         }}
       />
     </TouchableOpacity>
+
+    <ModalPopup visible={visibleEditProfile}>
+      <View style={styles.popUpContainer}>
+        <View style={styles.headerSendNotification}>
+          <TouchableOpacity onPress={() => setVisibleEditProfile(false)}>
+            <Image
+              source={require("../../../../assets/x.png")}
+              style={{ height: 20, width: 20 }}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.option}>
+          <TextInput
+            style={styles.textPopUp}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+          ></TextInput>
+          <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
+        </View>
+        <View style={styles.option}>
+          <TextInput
+            style={styles.textPopUp}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          ></TextInput>
+          <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
+        </View>
+        <View style={styles.option}>
+          <TextInput
+            style={styles.textPopUp}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></TextInput>
+          <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => editUser()}
+          style={styles.appButtonContainer}
+        >
+          <Text style={styles.appButtonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </ModalPopup>
   </View>;
 };
 
