@@ -52,6 +52,32 @@ const LogInScreen = ({ navigation }) => {
     }
   }, [sendRequest]);
 
+  const submitHandler = async () => {
+    setIsAuthenticating(true);
+    const validation = validateInput({
+      email: enteredEmail,
+      password: enteredPassword,
+    });
+    if (validation !== "valid") {
+      setCredentialsInvalid(validation);
+    } else {
+      setCredentials({
+        email: enteredEmail,
+        password: enteredPassword,
+      });
+      const input = {
+        email: enteredEmail,
+        password: enteredPassword,
+      };
+      let token = await loginUser(input);
+      if (!token) {
+        return;
+      } else {
+        await authContext.authenticate(token);
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Login</Text>
