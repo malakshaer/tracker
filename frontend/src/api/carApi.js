@@ -86,3 +86,20 @@ export const changeCarStatus = async (status, data) => {
 
   return res;
 };
+
+export const deleteAllCars = async () => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.delete(
+    `${BASE_URL}/deleteAllCars`,
+
+    {
+      headers: {
+        Authorization: `Bearer ${user?.access_token}`,
+      },
+    }
+  );
+
+  return res;
+};
