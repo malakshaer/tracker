@@ -27,6 +27,21 @@ Notifications.setNotificationHandler({
 });
 
 export default function NotificationScreen() {
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  const userId = useContext(UserContext);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${BASE_URL}/getAllNotifications/${userId}`,
+    }).then((res) => {
+      setMessages(res.data);
+    });
+  }, []);
   return (
     <View style={styles.container}>
       <ScrollView>
