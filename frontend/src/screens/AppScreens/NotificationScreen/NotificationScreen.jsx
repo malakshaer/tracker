@@ -93,6 +93,22 @@ export default function NotificationScreen() {
     };
   }, []);
 
+  //Schedule push notifications
+  const sendNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        channelId: "reminders",
+        title: "Tracker",
+        body: "Your Car is Active now!",
+        data: { data: "data goes here" },
+        repeatType: "second",
+      },
+      trigger: {
+        seconds: 1,
+      },
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
