@@ -1,3 +1,31 @@
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from "react-native";
+import * as Notifications from "expo-notifications";
+import Constants from "expo-constants";
+import storage from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/Ionicons";
+import NotificationComponent from "../../../components/Notifications/NotificationComponent";
+import readNotification from "../../../api/notificationsApi";
+const BASE_URL = "https://127.0.0.1:8000/api/auth";
+import UserContext from "../../../../App";
+import axios from "axios";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
 export default function NotificationScreen() {
   return (
     <View style={styles.container}>
