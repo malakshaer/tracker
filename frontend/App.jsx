@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { createContext, useState } from "react";
+import { createContext, useState, createRef } from "react";
 import TabStack from "./src/navigation/TabStack";
 import { OnboardingStack } from "./src/navigation/OnboardingStack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -18,7 +18,7 @@ const App = () => {
   const [token, setToken] = useState("");
   return (
     <TabStack />
-    // <OnboardingStack />
+    //<OnboardingStack />
     // <>
     //   <UserContext.Provider
     //     value={{
@@ -32,7 +32,7 @@ const App = () => {
     //       setEmail,
     //     }}
     //   >
-    //     <NavigationContainer>
+    //     <NavigationContainer ref={createRef()}>
     //       <OnboardingStack />
     //     </NavigationContainer>
     //   </UserContext.Provider>
