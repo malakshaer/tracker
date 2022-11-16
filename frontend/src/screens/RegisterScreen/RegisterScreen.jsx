@@ -29,4 +29,43 @@ const RegisterScreen = ({ navigation }) => {
     password: passwordIsInvalid,
     confirmPassword: passwordsUnMatched,
   } = credentialsInvalid;
+
+  function updateInputValueHandler(inputType, enteredValue) {
+    switch (inputType) {
+      case "name":
+        setEnterName(enteredValue);
+        break;
+      case "email":
+        setEnterEmail(enteredValue);
+        break;
+      case "password":
+        setEnterPassword(enteredValue);
+        break;
+      case "confirmPassword":
+        setEnterConfirmPassword(enteredValue);
+        break;
+    }
+  }
+  async function handleSignup() {
+    let validation = validateInput({
+      name: enterName,
+      email: enterEmail,
+      password: enterPassword,
+      confirmPassword: enterConfirmPassword,
+    });
+    if (validation !== "valid") {
+      setCredentialsInvalid(validation);
+    } else {
+      let credentials = {
+        name: enterName,
+        email: enterEmail,
+        password: enterPassword,
+        password_confirmation: enterConfirmPassword,
+      };
+      let response = await RegisterNewUser(credentials);
+      if (response === "success") {
+        navigation.navigate("Login");
+      }
+    }
+  }
 };
