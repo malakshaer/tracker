@@ -1,4 +1,25 @@
-import { View } from "react-native";
+import React, { useReducer, useState, useContext, useEffect } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import userProfile from "../../../../assets/user.jpg";
+import Icon from "react-native-vector-icons/Ionicons";
+import CarComponent from "../../../components/CarComponent/CarComponent";
+import ModalPopup from "../../../components/Modal/Modal";
+import { TextInput } from "react-native-gesture-handler";
+// import { createNewCar } from "../../../api/carApi";
+// import { editUser } from "../../../api/userApi";
+import { editCar } from "../../../api/carApi";
+import { deleteCar } from "../../../api/carApi";
+import axios from "axios";
+const BASE_URL = "https://127.0.0.1:8000/api/auth";
+import UserContext from "../../../../App";
+import add from "../../../../assets/add.png";
 
 const ProfileScreen = () => {
   <View>
@@ -56,6 +77,19 @@ const ProfileScreen = () => {
         />
       </View>
     </ScrollView>
+
+    <TouchableOpacity
+      style={styles.addButton}
+      onPress={() => setVisibleAddVehicle(true)}
+    >
+      <Image
+        source={add}
+        style={{
+          width: 70,
+          height: 70,
+        }}
+      />
+    </TouchableOpacity>
   </View>;
 };
 
