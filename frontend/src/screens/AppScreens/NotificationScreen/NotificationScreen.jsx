@@ -133,19 +133,19 @@ export default function NotificationScreen() {
           })}
           <NotificationComponent
             text={"Your car is active now"}
-            time={"2:00pm"}
+            time={"13:15"}
           />
           <NotificationComponent
             text={"Your car is active now"}
-            time={"2:45pm"}
+            time={"13:00"}
           />
-          <TouchableOpacity onPress={sendNotification}>
+          {/* <TouchableOpacity onPress={sendNotification}>
             <Text
               style={{ backgroundColor: "red", padding: 10, color: "white" }}
             >
               Click me to send a push notification
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </ScrollView>
     </View>
