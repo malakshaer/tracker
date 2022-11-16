@@ -51,7 +51,7 @@ const MapScreen = () => {
   });
 
   const {
-    currentLocation,
+    curLoc,
     time,
     distance,
     destinationCords,
@@ -73,7 +73,7 @@ const MapScreen = () => {
       animate(latitude, longitude);
       updateState({
         heading: heading,
-        currentLocation: { latitude, longitude },
+        curLoc: { latitude, longitude },
         coordinate: new AnimatedRegion({
           latitude: latitude,
           longitude: longitude,
@@ -104,8 +104,8 @@ const MapScreen = () => {
 
   const onCenter = () => {
     mapRef.current.animateToRegion({
-      latitude: currentLocation.latitude,
-      longitude: currentLocation.longitude,
+      latitude: curLoc.latitude,
+      longitude: curLoc.longitude,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     });
@@ -136,8 +136,9 @@ const MapScreen = () => {
       <View style={{ flex: 1 }}>
         <MapView
           ref={mapRef}
+          style={StyleSheet.absoluteFill}
           initialRegion={{
-            ...currentLocation,
+            ...curLoc,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
