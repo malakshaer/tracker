@@ -22,3 +22,23 @@ export const editUser = async (name, email, password) => {
 
   return res;
 };
+
+export const showProfile = async (name, email) => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.get(
+    `${BASE_URL}/showProfile`,
+    {
+      name,
+      email,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${user?.access_token}`,
+      },
+    }
+  );
+
+  return res;
+};
