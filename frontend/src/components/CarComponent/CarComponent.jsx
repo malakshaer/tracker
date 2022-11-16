@@ -13,4 +13,22 @@ const CarComponent = ({ carName, onPress }) => {
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  carDetails: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: "#032955",
+    marginHorizontal: 25,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    marginVertical: 5,
+  },
+  textStyle: {
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+});
 export default CarComponent;
