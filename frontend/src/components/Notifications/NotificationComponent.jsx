@@ -5,6 +5,10 @@ import { readNotification } from "../../api/notificationsApi";
 import UserContext from "../../../App";
 
 const NotificationComponent = ({ time, text }) => {
+  const [iconName, setIconName] = React.useState("checkmark-circle-outline");
+
+  const userId = React.useContext(UserContext);
+
   return (
     <View>
       <View style={styles.notificationContainer}>
@@ -36,4 +40,21 @@ const NotificationComponent = ({ time, text }) => {
 };
 //readNotification();
 
+const styles = StyleSheet.create({
+  notificationContainer: {
+    flexDirection: "column",
+    marginHorizontal: 40,
+    borderWidth: 2,
+    borderColor: "#032955",
+    borderRadius: 15,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    backgroundColor: "#fff",
+    marginBottom: 10,
+  },
+  notification: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
 export default NotificationComponent;
