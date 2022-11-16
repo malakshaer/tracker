@@ -66,3 +66,16 @@ export const deleteNotification = async (data) => {
 
   return res;
 };
+
+export const deleteAllNotifications = async () => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.delete(`${BASE_URL}/deleteAllNotifications`, {
+    headers: {
+      Authorization: `Bearer ${user?.access_token}`,
+    },
+  });
+
+  return res;
+};
