@@ -68,4 +68,61 @@ const RegisterScreen = ({ navigation }) => {
       }
     }
   }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleText}>Register</Text>
+      <View>
+        <TextInput
+          style={styles.input}
+          onUpdateValue={updateInputValueHandler.bind(this, "name")}
+          value={enterName.value}
+          placeholder="Enter your name"
+          placeholderTextColor="grey"
+          isInvalid={nameIsInvalid}
+        />
+
+        <TextInput
+          style={styles.input}
+          value={enterEmail.value}
+          placeholder="Enter email"
+          placeholderTextColor="grey"
+          onUpdateValue={updateInputValueHandler.bind(this, "email")}
+          isInvalid={emailIsInvalid}
+        />
+
+        <TextInput
+          style={styles.input}
+          value={enterPassword.value}
+          placeholder="Enter password"
+          placeholderTextColor="grey"
+          onUpdateValue={updateInputValueHandler.bind(this, "password")}
+          isInvalid={passwordIsInvalid}
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
+          value={enterConfirmPassword.value}
+          placeholder="Confirm password"
+          placeholderTextColor="grey"
+          onUpdateValue={updateInputValueHandler.bind(this, "confirmPassword")}
+          isInvalid={passwordsUnMatched}
+          secureTextEntry
+        />
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        handlePress={handleSignup}
+        style={styles.appButtonContainer}
+      >
+        <Text style={styles.appButtonText}>Create</Text>
+      </TouchableOpacity>
+
+      <View style={{ flexDirection: "row", marginTop: 20 }}>
+        <Text style={styles.appButtonText}>Already have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.navText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
