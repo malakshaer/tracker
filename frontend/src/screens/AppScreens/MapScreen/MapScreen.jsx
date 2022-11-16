@@ -50,6 +50,87 @@ const MapScreen = () => {
     heading: 0,
   });
 
+  const {
+    curLoc,
+    time,
+    distance,
+    destinationCords,
+    isLoading,
+    coordinate,
+    heading,
+  } = state;
+  const updateState = (data) => setState((state) => ({ ...state, ...data }));
+
+  useEffect(() => {
+    getLiveLocation();
+  }, []);
+
+  const getLiveLocation = async () => {
+    const locPermissionDenied = await locationPermission();
+    if (locPermissionDenied) {
+      const { latitude, longitude, heading } = await getCurrentLocation();
+      console.log("get live location after 4 second", heading);
+      animate(latitude, longitude);
+      updateState({
+        heading: heading,
+        curLoc: { latitude, longitude },
+        coordinate: new AnimatedRegion({
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }),
+      });
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getLiveLocation();
+    }, 20000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const animate = (latitude, longitude) => {
+    const newCoordinate = { latitude, longitude };
+    if (Platform.OS == "android") {
+      if (markerRef.current) {
+        markerRef.current.animateMarkerToCoordinate(newCoordinate, 7000);
+      }
+    } else {
+      coordinate.timing(newCoordinate).start();
+    }
+  };
+
+  const onCenter = () => {
+    mapRef.current.animateToRegion({
+      latitude: curLoc.latitude,
+      longitude: curLoc.longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
+  };
+
+  const fetchTime = (d, t) => {
+    updateState({
+      distance: d,
+      time: t,
+    });
+  };
+
+  React.useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
