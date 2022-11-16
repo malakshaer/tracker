@@ -26,6 +26,30 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const MapScreen = () => {
+  const mapRef = useRef();
+  const markerRef = useRef();
+
+  const [location, setLocation] = React.useState(null);
+  const [errorMsg, setErrorMsg] = React.useState(null);
+
+  const [state, setState] = useState({
+    curLoc: {
+      latitude: 33.88863,
+      longitude: 35.49548,
+    },
+    destinationCords: {},
+    isLoading: false,
+    coordinate: new AnimatedRegion({
+      latitude: 33.88863,
+      longitude: 35.49548,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }),
+    time: 0,
+    distance: 0,
+    heading: 0,
+  });
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
