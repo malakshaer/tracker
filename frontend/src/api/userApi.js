@@ -42,3 +42,16 @@ export const showProfile = async (name, email) => {
 
   return res;
 };
+
+export const deleteAccount = async () => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.delete(`${BASE_URL}/deleteAccount`, {
+    headers: {
+      Authorization: `Bearer ${user?.access_token}`,
+    },
+  });
+
+  return res;
+};
