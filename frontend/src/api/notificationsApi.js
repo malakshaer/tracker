@@ -14,3 +14,16 @@ export const getAllNotifications = async () => {
 
   return res;
 };
+
+export const getSingleNotification = async (data) => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  console.log("data");
+
+  const res = await axios.get(`${BASE_URL}/getSingleNotification/${data}`, {
+    headers: {
+      Authorization: `Bearer ${user?.access_token}`,
+    },
+  });
+
+  return res;
+};
