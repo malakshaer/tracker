@@ -31,6 +31,27 @@ const LogInScreen = ({ navigation }) => {
   const { email: emailIsInvalid, password: passwordIsInvalid } =
     credentialsInvalid;
 
+  function updateInputValueHandler(inputType, enteredValue) {
+    switch (inputType) {
+      case "email":
+        setEnteredEmail(enteredValue);
+        break;
+      case "password":
+        setEnteredPassword(enteredValue);
+        break;
+    }
+  }
+
+  useEffect(() => {
+    if (sendRequest) {
+      submitHandler();
+      return () => {
+        setSendRequest(false);
+        setIsAuthenticating(false);
+      };
+    }
+  }, [sendRequest]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Login</Text>
