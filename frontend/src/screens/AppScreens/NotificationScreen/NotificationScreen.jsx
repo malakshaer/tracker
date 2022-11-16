@@ -41,3 +41,18 @@ export default function NotificationScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+  },
+  note: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingVertical: 10,
+  },
+  text: {
+    color: "#032955",
+    fontSize: 16,
+  },
+});
