@@ -60,17 +60,21 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes build with figma from the user sorties we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Landing                                | Login                                |
-| -------------------------------------- | ------------------------------------ |
-| <img src="./readme/real-landing.png"/> | <img src="./readme/real-login.png"/> |
+| Landing                                | Login                                | Register                                |
+| -------------------------------------- | ------------------------------------ | --------------------------------------- |
+| <img src="./readme/real-landing.png"/> | <img src="./readme/real-login.png"/> | <img src="./readme/real-register.png"/> |
 
-| Register                                | Map Screen                         |
-| --------------------------------------- | ---------------------------------- |
-| <img src="./readme/real-register.png"/> | <img src="./readme/real-map.png"/> |
+| Map Screen                          | Notification Screen                                | Notifications                                |
+| ----------------------------------- | -------------------------------------------------- | -------------------------------------------- |
+| <img src="./readme/real-map.png" /> | <img src="./readme/real-notification-screen.png"/> | <img src="./readme/real-notifications.png"/> |
 
-| Settings                                | Settings/Popup                                |
-| --------------------------------------- | --------------------------------------------- |
-| <img src="./readme/real-settings.png"/> | <img src="./readme/real-settings-popup.png"/> |
+| Profile Screen                         | Edit Profile                                | Add Car                                    |
+| -------------------------------------- | ------------------------------------------- | ------------------------------------------ |
+| <img src="./readme/real-profile.png"/> | <img src="./readme/real-edit-profile.png"/> | <img src="./readme/real-add-vehicle.png"/> |
+
+| Edit Car                                 | Settings                                 | Settings/Popup                                 |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| <img src="./readme/real-edit-car.png" /> | <img src="./readme/real-settings.png" /> | <img src="./readme/real-settings-popup.png" /> |
 
 <br><br>
 <img src="./readme/title6.svg"/>
