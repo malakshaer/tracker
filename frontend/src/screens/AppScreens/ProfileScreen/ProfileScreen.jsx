@@ -231,23 +231,23 @@ const ProfileScreen = () => {
             <Icon name={"add"} size={30} color={"#032955"} />
           </View>
           {/* <View style={styles.default}>
-                <TouchableOpacity>
-                  <Icon
-                    name={iconName}
-                    size={30}
-                    color={"#032955"}
-                    onPress={() => {
-                      if (iconName == "checkmark-circle-outline") {
-                        setIconName("checkmark-circle");
-                      }
-                      if (iconName == "checkmark-circle") {
-                        setIconName("checkmark-circle-outline");
-                      }
-                    }}
-                  />
-                </TouchableOpacity>
-                <Text>Make this my default vehicle</Text>
-              </View> */}
+            <TouchableOpacity>
+              <Icon
+                name={iconName}
+                size={30}
+                color={"#032955"}
+                onPress={() => {
+                  if (iconName == "checkmark-circle-outline") {
+                    setIconName("checkmark-circle");
+                  }
+                  if (iconName == "checkmark-circle") {
+                    setIconName("checkmark-circle-outline");
+                  }
+                }}
+              />
+            </TouchableOpacity>
+            <Text>Make this my default vehicle</Text>
+          </View> */}
 
           <TouchableOpacity
             activeOpacity={0.5}
@@ -429,4 +429,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
+
 export default ProfileScreen;
