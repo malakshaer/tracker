@@ -24,3 +24,18 @@ export default function validateInput(credentials) {
   }
   return "valid";
 }
+export const RegisterNewUser = async (credentials) => {
+  try {
+    const res = await fetch(`${BASE_URL}/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+    const data = await res.json();
+    return handleResponse(data);
+  } catch (err) {
+    console.log({ err });
+  }
+};
