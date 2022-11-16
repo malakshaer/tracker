@@ -127,7 +127,7 @@ const ProfileScreen = () => {
               <CarComponent
                 key={car._id}
                 carId={car._id}
-                carName={car.car_name}
+                carName={car.carName}
               />
             );
           })}
@@ -429,5 +429,4 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
-
 export default ProfileScreen;
