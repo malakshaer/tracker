@@ -11,7 +11,7 @@ class Car extends Model
 
     protected $fillable = [
         'id',
-        'name',
+        'carName',
         'pin',
         'longitude',
         'latitude'
