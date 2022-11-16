@@ -26,6 +26,7 @@ const BottomSheet = ({ visible, children }) => {
       }).start();
     }
   };
+
   return (
     <Modal transparent visible={showModal}>
       <View style={styles.modalBackGround}>
@@ -41,5 +42,23 @@ const BottomSheet = ({ visible, children }) => {
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  modalBackGround: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 50,
+  },
+  modalContainer: {
+    width: "100%",
+    backgroundColor: "white",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    elevation: 20,
+  },
+});
 
 export default BottomSheet;
