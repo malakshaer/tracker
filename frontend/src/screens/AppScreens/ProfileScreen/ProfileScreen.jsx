@@ -289,7 +289,7 @@ const ProfileScreen = () => {
             <TextInput style={styles.textPopUp} placeholder="PIN"></TextInput>
             <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
           </View>
-          <View style={styles.default}>
+          {/* <View style={styles.default}>
             <TouchableOpacity>
               <Icon
                 name={iconName}
@@ -306,7 +306,7 @@ const ProfileScreen = () => {
               />
             </TouchableOpacity>
             <Text>Make this my default vehicle</Text>
-          </View>
+          </View> */}
 
           <TouchableOpacity
             activeOpacity={0.5}
