@@ -13,6 +13,24 @@ import { AuthContext } from "../../redux/AuthContext";
 // import AsyncStorage from "react-native";
 
 const LogInScreen = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+
+  const [sendRequest, setSendRequest] = useState(false);
+  const [credentials, setCredentials] = useState({});
+  const [isAuthenticating, setIsAuthenticating] = useState("");
+  const [token, setToken] = useState();
+
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+
+  const [credentialsInvalid, setCredentialsInvalid] = useState({
+    email: false,
+    password: false,
+  });
+
+  const { email: emailIsInvalid, password: passwordIsInvalid } =
+    credentialsInvalid;
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Login</Text>
