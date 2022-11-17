@@ -1,5 +1,4 @@
-import axios from "axios";
-import { React, useState, useContext, useEffect } from "react";
+import { React, useState } from "react";
 import {
   View,
   Text,
@@ -7,74 +6,42 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { validateInput } from "./loginValidation";
-import { loginUser } from "./loginValidation";
-import { AuthContext } from "../../redux/AuthContext";
+// import { validateInput } from "./loginValidation";
+// import { loginUser } from "./loginValidation";
+// import { AuthContext } from "../../redux/AuthContext";
 // import AsyncStorage from "react-native";
 
+import { useDispatch } from "react-redux";
+import { set } from "../../redux/slices/userSlice";
+import { login } from "../../api/authApi";
+import "localstorage-polyfill";
+import Loading from "../../components/Loading/Loading";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const LogInScreen = ({ navigation }) => {
-  const authContext = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
-  const [sendRequest, setSendRequest] = useState(false);
-  const [credentials, setCredentials] = useState({});
-  const [isAuthenticating, setIsAuthenticating] = useState("");
-  const [token, setToken] = useState();
+  const [email, setEmail] = useState("malakshaer@gmail.com");
+  const [password, setPassword] = useState("12345678910k");
+  const dispatch = useDispatch();
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const res = await login(email, password);
+      dispatch(set(res?.data));
+      const user = await AsyncStorage.setItem(
+        "user",
+        JSON.stringify(res?.data)
+      );
 
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-
-  const [credentialsInvalid, setCredentialsInvalid] = useState({
-    email: false,
-    password: false,
-  });
-
-  const { email: emailIsInvalid, password: passwordIsInvalid } =
-    credentialsInvalid;
-
-  function updateInputValueHandler(inputType, enteredValue) {
-    switch (inputType) {
-      case "email":
-        setEnteredEmail(enteredValue);
-        break;
-      case "password":
-        setEnteredPassword(enteredValue);
-        break;
-    }
-  }
-
-  useEffect(() => {
-    if (sendRequest) {
-      submitHandler();
-      return () => {
-        setSendRequest(false);
-        setIsAuthenticating(false);
-      };
-    }
-  }, [sendRequest]);
-
-  const submitHandler = async () => {
-    setIsAuthenticating(true);
-    const validation = validateInput({
-      email: enteredEmail,
-      password: enteredPassword,
-    });
-    if (validation !== "valid") {
-      setCredentialsInvalid(validation);
-    } else {
-      setCredentials({
-        email: enteredEmail,
-        password: enteredPassword,
-      });
-      const input = {
-        email: enteredEmail,
-        password: enteredPassword,
-      };
-      let token = await loginUser(input);
-      if (!token) {
-        return;
-      } else {
-        await authContext.authenticate(token);
+      if (res?.status === 200) {
+        props.navigation.navigate("MapScreen");
       }
+    } catch (error) {
+      console.log(error);
+      alert("invalid Email or Password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,28 +50,25 @@ const LogInScreen = ({ navigation }) => {
       <Text style={styles.titleText}>Login</Text>
       <View>
         <TextInput
-          style={styles.input}
-          onUpdateValue={updateInputValueHandler.bind(this, "email")}
-          value={enteredEmail.value}
-          placeholder="Enter Email"
-          placeholderTextColor="grey"
-          isInvalid={emailIsInvalid}
+          onChangeText={setEmail}
+          value={email}
+          placeholder={"Enter your email"}
+          style={styles.emailInput}
         />
         <TextInput
-          style={styles.input}
-          value={enteredPassword.value}
-          placeholder="Enter Password"
-          placeholderTextColor="grey"
-          onUpdateValue={updateInputValueHandler.bind(this, "password")}
+          onChangeText={setPassword}
+          value={password}
+          placeholder={"Enter your password"}
+          style={styles.passwordInput}
           secureTextEntry
-          isInvalid={passwordIsInvalid}
         />
+        {loading && <Loading />}
       </View>
       <TouchableOpacity
         style={styles.appButtonContainer}
         activeOpacity={0.5}
         onPress={() => {
-          setSendRequest(true);
+          handleLogin();
         }}
       >
         <Text style={styles.appButtonText}>Login</Text>
