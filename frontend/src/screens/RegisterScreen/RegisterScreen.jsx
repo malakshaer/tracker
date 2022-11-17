@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useNavigation } from "react";
 import {
   View,
@@ -10,9 +11,13 @@ import { NavigationActions } from "react-navigation";
 import validateInput from "./registerValidation";
 import RegisterNewUser from "./registerValidation";
 
+import { register } from "../../api/authApi";
+import { set } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState("test");
-  const [email, setEmail] = useState("test@gmail.com");
+  const [name, setName] = useState("malakshaer");
+  const [email, setEmail] = useState("malakshaer@gmail.com");
   const [password, setPassword] = useState("12345678910k");
   const [verifyPassword, setVerifyPassword] = useState("12345678910k");
 
@@ -40,39 +45,33 @@ const RegisterScreen = ({ navigation }) => {
       <View>
         <TextInput
           style={styles.input}
-          onUpdateValue={updateInputValueHandler.bind(this, "name")}
-          value={enterName.value}
-          placeholder="Enter your name"
-          placeholderTextColor="grey"
-          isInvalid={nameIsInvalid}
+          onChangeText={setName}
+          value={name}
+          placeholder={"name"}
         />
 
         <TextInput
           style={styles.input}
-          value={enterEmail.value}
-          placeholder="Enter email"
-          placeholderTextColor="grey"
-          onUpdateValue={updateInputValueHandler.bind(this, "email")}
-          isInvalid={emailIsInvalid}
+          onChangeText={setEmail}
+          value={email}
+          placeholder={"Email"}
         />
 
         <TextInput
           style={styles.input}
-          value={enterPassword.value}
-          placeholder="Enter password"
-          placeholderTextColor="grey"
-          onUpdateValue={updateInputValueHandler.bind(this, "password")}
-          isInvalid={passwordIsInvalid}
+          textContentType="password"
+          onChangeText={setPassword}
           secureTextEntry
+          value={password}
+          placeholder={"Password"}
         />
         <TextInput
           style={styles.input}
-          value={enterConfirmPassword.value}
-          placeholder="Confirm password"
-          placeholderTextColor="grey"
-          onUpdateValue={updateInputValueHandler.bind(this, "confirmPassword")}
-          isInvalid={passwordsUnMatched}
+          textContentType="password"
+          onChangeText={setVerifyPassword}
+          value={verifyPassword}
           secureTextEntry
+          placeholder={"Verify Password"}
         />
       </View>
       <TouchableOpacity
