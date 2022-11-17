@@ -1,9 +1,11 @@
 import "react-native-gesture-handler";
 import { createContext, useState, createRef } from "react";
+import { Provider } from "react-redux";
 import TabStack from "./src/navigation/TabStack";
 import { OnboardingStack } from "./src/navigation/OnboardingStack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StackSwitcher } from "./src/navigation/StackSwitcher";
+import store from "./src/redux/store";
 // import { AuthProvider } from "./src/redux/AuthContext";
 
 // const ContextProvider = createContext();
@@ -11,32 +13,13 @@ import { StackSwitcher } from "./src/navigation/StackSwitcher";
 export const UserContext = createContext("");
 
 const App = () => {
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  const [token, setToken] = useState("");
   return (
-    <TabStack />
+    // <TabStack />
     //<OnboardingStack />
-    // <>
-    //   <UserContext.Provider
-    //     value={{
-    //       id,
-    //       setId,
-    //       token,
-    //       setToken,
-    //       name,
-    //       setName,
-    //       email,
-    //       setEmail,
-    //     }}
-    //   >
-    //     <NavigationContainer ref={createRef()}>
-    //       <OnboardingStack />
-    //     </NavigationContainer>
-    //   </UserContext.Provider>
-    // </>
+
+    <Provider store={store}>
+      <StackSwitcher />
+    </Provider>
   );
 };
 
