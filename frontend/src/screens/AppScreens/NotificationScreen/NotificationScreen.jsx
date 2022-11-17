@@ -127,11 +127,6 @@ export default function NotificationScreen() {
               if you made the action
             </Text>
           </View>
-          {messages.map((msg) => {
-            // console.warn(msg);
-            const date = new Date(msg.created_at);
-            return <NotificationComponent text={msg.message} time={data} />;
-          })}
           {/* <EmptyStateView
             enableButton
             buttonText="Refresh"
@@ -140,6 +135,11 @@ export default function NotificationScreen() {
             headerText="No Notification yet"
             headerTextStyle={styles.headerTextStyle}
           /> */}
+          {messages.map((msg) => {
+            // console.warn(msg);
+            const date = new Date(msg.created_at);
+            return <NotificationComponent text={msg.message} time={data} />;
+          })}
 
           <NotificationComponent
             text={"Your car is active now"}
