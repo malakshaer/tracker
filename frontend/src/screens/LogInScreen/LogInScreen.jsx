@@ -53,13 +53,13 @@ const LogInScreen = ({ navigation }) => {
           onChangeText={setEmail}
           value={email}
           placeholder={"Enter your email"}
-          style={styles.emailInput}
+          style={styles.input}
         />
         <TextInput
           onChangeText={setPassword}
           value={password}
           placeholder={"Enter your password"}
-          style={styles.passwordInput}
+          style={styles.input}
           secureTextEntry
         />
         {loading && <Loading />}
