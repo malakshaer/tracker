@@ -17,6 +17,8 @@ import readNotification from "../../../api/notificationsApi";
 const BASE_URL = "https://127.0.0.1:8000/api/auth";
 import UserContext from "../../../../App";
 import axios from "axios";
+import EmptyStateView from "@tttstudios/react-native-empty-state";
+import logo from "../../../../assets/logo-marker.png";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -31,16 +33,21 @@ export default function NotificationScreen() {
   const notificationListener = useRef();
   const responseListener = useRef();
 
-  const userId = useContext(UserContext);
+  const id = useContext(UserContext);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     axios({
       method: "GET",
-      url: `${BASE_URL}/getAllNotifications/${userId}`,
-    }).then((res) => {
-      setMessages(res.data);
-    });
+      url: `${BASE_URL}/getAllNotifications/${id}`,
+    })
+      .then((res) => {
+        setMessages(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   //Get permission for notification
@@ -122,23 +129,23 @@ export default function NotificationScreen() {
           </View>
           {messages.map((msg) => {
             // console.warn(msg);
-            return (
-              <NotificationComponent
-                key={msg._id}
-                msgId={msg._id}
-                text={"Your car is active now"}
-                time={msg.time}
-              />
-            );
+            const date = new Date(msg.created_at);
+            return <NotificationComponent text={msg.message} time={data} />;
           })}
+          {/* <EmptyStateView
+            enableButton
+            buttonText="Refresh"
+            imageSource={logo}
+            imageStyle={styles.imageStyle}
+            headerText="No Notification yet"
+            headerTextStyle={styles.headerTextStyle}
+          /> */}
+
           <NotificationComponent
             text={"Your car is active now"}
             time={"13:15"}
           />
-          <NotificationComponent
-            text={"Your car is active now"}
-            time={"13:00"}
-          />
+
           {/* <TouchableOpacity onPress={sendNotification}>
             <Text
               style={{ backgroundColor: "red", padding: 10, color: "white" }}
@@ -164,5 +171,15 @@ const styles = StyleSheet.create({
   text: {
     color: "#032955",
     fontSize: 16,
+  },
+  headerTextStyle: {
+    color: "rgb(76, 76, 76)",
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  imageStyle: {
+    height: "50%",
+    resizeMode: "contain",
+    marginTop: 100,
   },
 });
