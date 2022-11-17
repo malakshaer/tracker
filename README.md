@@ -30,17 +30,13 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Landing                                     | Login                                      |
-| ------------------------------------------- | ------------------------------------------ |
-| <img src="./readme/landing.png" width=190/> | <img src="./readme/login.png" width=190 /> |
+| Landing                                     | Login                                      | Register                                     |
+| ------------------------------------------- | ------------------------------------------ | -------------------------------------------- |
+| <img src="./readme/landing.png" width=190/> | <img src="./readme/login.png" width=190 /> | <img src="./readme/register.png" width=190/> |
 
-| Register                                     | Map Screen                                    |
-| -------------------------------------------- | --------------------------------------------- |
-| <img src="./readme/register.png" width=190/> | <img src="./readme/mapScreen.png" width=185/> |
-
-| Settings Screen                              | Settings Popup                            |
-| -------------------------------------------- | ----------------------------------------- |
-| <img src="./readme/settings.png" width=185/> | <img src="./readme/settings-popup.png" /> |
+| Map Screen                                    | Settings Screen                              | Settings Popup                            |
+| --------------------------------------------- | -------------------------------------------- | ----------------------------------------- |
+| <img src="./readme/mapScreen.png" width=185/> | <img src="./readme/settings.png" width=185/> | <img src="./readme/settings-popup.png" /> |
 
 <br><br>
 
