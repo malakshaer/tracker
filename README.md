@@ -12,9 +12,9 @@
 
 <img src="./readme/title2.svg"/>
 
-> Tracker Application is a car tracker application with a real time GPS tracking system for car, that alert the user if his/her car is being robbed
+> Tracker Application is a car tracker application with a real time GPS tracking system for vehicles, that alert the users if their cars is being robbed
 >
-> Whenever the car is active a push notification is sent to the user alerting him that his car is moving now, so if he did the action he check ok on the notification if not he can track the car to see its destination.
+> Whenever the car is active a push notification is sent to the users alerting them that their cars is moving now, so if they did the action they check ok on the notification if not they can track the car to see its path.
 
 ### User Stories
 
