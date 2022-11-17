@@ -24,3 +24,13 @@ export const register = async (
   });
   return res;
 };
+
+export const showProfile = async () => {
+  const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
+  const res = axios.get(`${BASE_URL}/profile`, {
+    headers: {
+      Authorization: `Bearer ${user?.access_token}`,
+    },
+  });
+  return res;
+};
