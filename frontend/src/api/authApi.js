@@ -9,3 +9,18 @@ export const login = async (email, password) => {
   });
   return res;
 };
+
+export const register = async (
+  name,
+  email,
+  password,
+  password_confirmation
+) => {
+  const res = axios.post(`${BASE_URL}/register`, {
+    name,
+    email,
+    password,
+    password_confirmation,
+  });
+  return res;
+};
