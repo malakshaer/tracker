@@ -16,7 +16,6 @@ const App = () => {
   return (
     // <TabStack />
     //<OnboardingStack />
-
     <Provider store={store}>
       <StackSwitcher />
     </Provider>
