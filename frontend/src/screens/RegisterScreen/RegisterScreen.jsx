@@ -11,63 +11,29 @@ import validateInput from "./registerValidation";
 import RegisterNewUser from "./registerValidation";
 
 const RegisterScreen = ({ navigation }) => {
-  const [enterName, setEnterName] = useState("");
-  const [enterEmail, setEnterEmail] = useState("");
-  const [enterPassword, setEnterPassword] = useState("");
-  const [enterConfirmPassword, setEnterConfirmPassword] = useState("");
+  const [name, setName] = useState("test");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("12345678910k");
+  const [verifyPassword, setVerifyPassword] = useState("12345678910k");
 
-  const [credentialsInvalid, setCredentialsInvalid] = useState({
-    name: false,
-    email: false,
-    password: false,
-    confirmPassword: false,
-  });
+  const dispatch = useDispatch();
 
-  const {
-    name: nameIsInvalid,
-    email: emailIsInvalid,
-    password: passwordIsInvalid,
-    confirmPassword: passwordsUnMatched,
-  } = credentialsInvalid;
+  const handleRegister = async () => {
+    try {
+      const res = await register(name, email, password, verifyPassword);
+      console.log(res);
 
-  function updateInputValueHandler(inputType, enteredValue) {
-    switch (inputType) {
-      case "name":
-        setEnterName(enteredValue);
-        break;
-      case "email":
-        setEnterEmail(enteredValue);
-        break;
-      case "password":
-        setEnterPassword(enteredValue);
-        break;
-      case "confirmPassword":
-        setEnterConfirmPassword(enteredValue);
-        break;
+      dispatch(set(res?.data));
+      const user = await AsyncStorage.setItem(
+        "user",
+        JSON.stringify(res?.data)
+      );
+
+      props.navigation.navigate("MapScreen");
+    } catch (error) {
+      console.log(error);
     }
-  }
-  async function handleSignup() {
-    let validation = validateInput({
-      name: enterName,
-      email: enterEmail,
-      password: enterPassword,
-      confirmPassword: enterConfirmPassword,
-    });
-    if (validation !== "valid") {
-      setCredentialsInvalid(validation);
-    } else {
-      let credentials = {
-        name: enterName,
-        email: enterEmail,
-        password: enterPassword,
-        password_confirmation: enterConfirmPassword,
-      };
-      let response = await RegisterNewUser(credentials);
-      if (response === "success") {
-        navigation.navigate("Login");
-      }
-    }
-  }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Register</Text>
@@ -111,7 +77,7 @@ const RegisterScreen = ({ navigation }) => {
       </View>
       <TouchableOpacity
         activeOpacity={0.5}
-        handlePress={handleSignup}
+        handlePress={handleRegister}
         style={styles.appButtonContainer}
       >
         <Text style={styles.appButtonText}>Create</Text>
