@@ -33,7 +33,7 @@ const MapScreen = () => {
   const [errorMsg, setErrorMsg] = React.useState(null);
 
   const [state, setState] = useState({
-    curLoc: {
+    currentLocation: {
       latitude: 33.88863,
       longitude: 35.49548,
     },
@@ -51,7 +51,7 @@ const MapScreen = () => {
   });
 
   const {
-    curLoc,
+    currentLocation,
     time,
     distance,
     destinationCords,
@@ -73,7 +73,7 @@ const MapScreen = () => {
       animate(latitude, longitude);
       updateState({
         heading: heading,
-        curLoc: { latitude, longitude },
+        currentLocation: { latitude, longitude },
         coordinate: new AnimatedRegion({
           latitude: latitude,
           longitude: longitude,
@@ -104,8 +104,8 @@ const MapScreen = () => {
 
   const onCenter = () => {
     mapRef.current.animateToRegion({
-      latitude: curLoc.latitude,
-      longitude: curLoc.longitude,
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     });
@@ -138,7 +138,7 @@ const MapScreen = () => {
           ref={mapRef}
           style={StyleSheet.absoluteFill}
           initialRegion={{
-            ...curLoc,
+            ...currentLocation,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
@@ -160,14 +160,16 @@ const MapScreen = () => {
 
           {Object.keys(destinationCords).length > 0 && (
             <MapViewDirections
-              origin={curLoc}
+              origin={currentLocation}
               destination={destinationCords}
               apikey={GOOGLE_MAP_KEY}
               strokeWidth={6}
               strokeColor="red"
               optimizeWaypoints={true}
               onStart={() => {
+                //push notification
                 sendNotification();
+                //send notification to the server
                 sendNewNotification();
                 console.log(`Started routing"`);
               }}
@@ -175,14 +177,7 @@ const MapScreen = () => {
                 console.log(`Distance: ${result.distance} km`);
                 console.log(`Duration: ${result.duration} min.`);
                 fetchTime(result.distance, result.duration),
-                  mapRef.current.fitToCoordinates(result.coordinates, {
-                    edgePadding: {
-                      // right: 30,
-                      // bottom: 300,
-                      // left: 30,
-                      // top: 100,
-                    },
-                  });
+                  mapRef.current.fitToCoordinates(result.coordinates);
               }}
               onError={(errorMessage) => {
                 // console.log('GOT AN ERROR');
