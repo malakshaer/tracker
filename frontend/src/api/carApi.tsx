@@ -28,14 +28,13 @@ export const getCar = async (data) => {
   return res;
 };
 
-export const createNewCar = async (name, pin) => {
+export const createNewCar = async (carName, pin) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.post(
-    `${BASE_URL}/createNewCar`,
+  const res = axios.post(`http://10.0.2.2:8000/api/auth/createNewCar`,
     {
-      name,
+      carName,
       pin,
     },
     {
