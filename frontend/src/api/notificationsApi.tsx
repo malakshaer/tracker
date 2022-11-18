@@ -28,11 +28,11 @@ export const getSingleNotification = async (data) => {
   return res;
 };
 
-export const readNotification = async (data) => {
+export const readNotification = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.put(`${BASE_URL}/readNotification/${data}`, {
+  const res = await axios.put(`http://10.0.2.2:8000/api/auth/readNotification`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
