@@ -54,11 +54,11 @@ export const sendNewNotification = async () => {
   return res;
 };
 
-export const deleteNotification = async (data) => {
+export const deleteNotification = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.delete(`${BASE_URL}/deleteNotification/${data}`, {
+  const res = await axios.delete(`http://10.0.2.2:8000/api/auth/deleteNotification`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
