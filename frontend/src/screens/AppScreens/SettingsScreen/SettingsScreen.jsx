@@ -8,6 +8,7 @@ import LandingScreen from "../../LandingScreen/LandingScreen";
 import { deleteAllNotifications } from "../../../api/notificationsApi";
 import { deleteAllCars } from "../../../api/carApi";
 import { deleteAccount } from "../../../api/userApi";
+import { deleteUser } from "../../../redux/slices/userSlice";
 
 const SettingsScreen = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
@@ -53,7 +54,7 @@ const SettingsScreen = ({ navigation }) => {
             Are you sure you want to delete you account?
           </Text>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => deleteAccount()}>
+            <TouchableOpacity onPress={() => deleteUser()}>
               <Image
                 source={require("../../../../assets/check.png")}
                 style={{ height: 40, width: 40 }}
