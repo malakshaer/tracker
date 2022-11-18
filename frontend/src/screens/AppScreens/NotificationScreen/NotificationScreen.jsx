@@ -14,11 +14,11 @@ import storage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/Ionicons";
 import NotificationComponent from "../../../components/Notifications/NotificationComponent";
 import readNotification from "../../../api/notificationsApi";
-const BASE_URL = "https://127.0.0.1:8000/api/auth";
-import UserContext from "../../../../App";
+
 import axios from "axios";
 import EmptyStateView from "@tttstudios/react-native-empty-state";
 import logo from "../../../../assets/logo-marker.png";
+import Loading from "../../../components/Loading/Loading";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -33,13 +33,29 @@ export default function NotificationScreen() {
   const notificationListener = useRef();
   const responseListener = useRef();
 
-  const id = useContext(UserContext);
-  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      message: "Your car is active now",
+      create_at: "22:10",
+    },
+  ]);
+
+  const showNotifications = () => {
+    firestore()
+      .collection("Notifications")
+      .add({
+        message: message,
+      })
+      .then(() => {
+        console.log(data);
+      });
+  };
 
   useEffect(() => {
     axios({
       method: "GET",
-      url: `${BASE_URL}/getAllNotifications/${id}`,
+      url: `http://10.0.2.2:8000/api/auth/getAllNotifications`,
     })
       .then((res) => {
         setMessages(res.data);
@@ -135,16 +151,19 @@ export default function NotificationScreen() {
             headerText="No Notification yet"
             headerTextStyle={styles.headerTextStyle}
           /> */}
-          {messages.map((msg) => {
-            // console.warn(msg);
-            const date = new Date(msg.created_at);
-            return <NotificationComponent text={msg.message} time={data} />;
-          })}
-
-          <NotificationComponent
-            text={"Your car is active now"}
-            time={"13:15"}
-          />
+          <View>
+            {loading ? (
+              <Loading />
+            ) : (
+              messages.map((msg) => (
+                <NotificationComponent
+                  text={msg.message}
+                  time={msg.create_at}
+                />
+              ))
+            )}
+          </View>
+          {/* const date = new Date(msg.created_at); */}
 
           {/* <TouchableOpacity onPress={sendNotification}>
             <Text
