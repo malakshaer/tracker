@@ -185,6 +185,7 @@ const MapScreen = () => {
             />
           )}
         </MapView>
+
         <TouchableOpacity
           style={{
             position: "absolute",
