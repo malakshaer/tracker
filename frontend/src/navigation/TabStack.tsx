@@ -24,7 +24,7 @@ function TabStack() {
       <Tab.Navigator
         initialRouteName={MapName}
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ color, size }) => {
             let iconName;
             let rn = route.name;
 
