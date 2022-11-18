@@ -41,7 +41,7 @@ const RegisterScreen = (props: RegisterScreenProps) => {
         JSON.stringify(res?.data)
       );
 
-      props.navigation.navigate("Map");
+      props.navigation.navigate("Tab");
     } catch (error) {
       console.log(error);
     } finally {
