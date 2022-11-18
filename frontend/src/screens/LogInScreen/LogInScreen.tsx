@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { useDispatch } from "react-redux";
-import { set } from "../../redux/slices/userSlice";
+import { addUser } from "../../redux/slices/userSlice";
 import { login } from "../../api/authApi";
 import "localstorage-polyfill";
 import Loading from "../../components/Loading/Loading";
@@ -31,7 +31,7 @@ const LogInScreen = (props: loginScreenProps) => {
     try {
       setLoading(true);
       const res = await login(email, password);
-      dispatch(set(res?.data));
+      dispatch(addUser(res?.data));
       const user = await AsyncStorage.setItem(
         "user",
         JSON.stringify(res?.data)
