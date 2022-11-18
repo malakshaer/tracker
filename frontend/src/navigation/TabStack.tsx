@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 function TabStack() {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
         initialRouteName={MapName}
         screenOptions={({ route }) => ({
