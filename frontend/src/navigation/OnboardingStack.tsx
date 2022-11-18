@@ -6,12 +6,6 @@ import LandingScreen from "../screens/LandingScreen/LandingScreen";
 import LogInScreen from "../screens/LogInScreen/LogInScreen";
 import RegisterScreen from "../screens/RegisterScreen/RegisterScreen";
 import TabStack from "./TabStack";
-import MapScreen from "../screens/AppScreens/MapScreen/MapScreen";
-import ProfileScreen from "../screens/AppScreens/ProfileScreen/ProfileScreen";
-import NotificationScreen from "../screens/AppScreens/NotificationScreen/NotificationScreen";
-import SettingsScreen from "../screens/AppScreens/SettingsScreen/SettingsScreen";
-// import MapScreen from "../screens/AppScreens/MapScreen/MapScreen";
-// import { colors } from "../constants/palette";
 
 export function OnboardingStack() {
   const Stack = createStackNavigator();
@@ -31,7 +25,7 @@ export function OnboardingStack() {
           },
         }}
       >
-        <Stack.Screen name="Tracker" component={LandingScreen} />
+        <Stack.Screen name="Tracker" component={LandingScreen}/>
         <Stack.Screen
           name="Login"
           component={LogInScreen}
