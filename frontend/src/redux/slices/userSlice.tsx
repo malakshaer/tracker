@@ -28,7 +28,11 @@ const userSlice = createSlice({
         state.userProfile = action.payload.userProfile
         
         // asyncStorageManager.setItem("userProfile", action.payload.userProfile)
-    },    
+    },  
+    set(state, action){
+      console.log('adding object  ', action.payload)
+        return action.payload;
+    },  
   },
 });
 
