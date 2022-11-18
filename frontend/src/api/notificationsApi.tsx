@@ -45,7 +45,7 @@ export const sendNewNotification = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.post(`${BASE_URL}/sendNotification`, {
+  const res = await axios.post(`http://10.0.2.2:8000/api/auth/sendNotification`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
