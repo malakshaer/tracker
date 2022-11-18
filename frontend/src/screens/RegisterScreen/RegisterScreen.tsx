@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { register } from "../../api/authApi";
-import { set } from "../../redux/slices/userSlice";
+import { addUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../../components/Loading/Loading";
 
@@ -19,7 +19,7 @@ interface RegisterScreenProps {
 
 const RegisterScreen = (props: RegisterScreenProps) => {
 
-  const goToLogIn = () => props.navigation.navigate("Login");
+  const goToLogInScreen = () => props.navigation.navigate("Login");
   const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("malakshaer");
@@ -35,13 +35,13 @@ const RegisterScreen = (props: RegisterScreenProps) => {
       const res = await register(name, email, password);
       console.log(res);
 
-      dispatch(set(res?.data));
+      dispatch(addUser(res?.data));
       const user = await AsyncStorage.setItem(
         "user",
         JSON.stringify(res?.data)
       );
 
-      props.navigation.navigate("TabStack");
+      props.navigation.navigate("Map");
     } catch (error) {
       console.log(error);
     } finally {
@@ -94,7 +94,7 @@ const RegisterScreen = (props: RegisterScreenProps) => {
 
       <View style={{ flexDirection: "row", marginTop: 20 }}>
         <Text style={styles.appButtonText}>Already have an account? </Text>
-        <TouchableOpacity onPress={goToLogIn}>
+        <TouchableOpacity onPress={goToLogInScreen}>
           <Text style={styles.navText}>Login</Text>
         </TouchableOpacity>
       </View>
