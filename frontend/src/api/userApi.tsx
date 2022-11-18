@@ -1,13 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-const BASE_URL = "http://127.0.0.1:8000/api/auth";
 
 export const editUser = async (name, email, password) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.put(
-    `${BASE_URL}/editUser`,
+    `http://10.0.2.2:8000/api/editUser`,
     {
       name,
       email,
@@ -16,6 +15,7 @@ export const editUser = async (name, email, password) => {
     {
       headers: {
         Authorization: `Bearer ${user?.access_token}`,
+        'content-type': 'application/x-www-form-urlencoded' 
       },
     }
   );
@@ -23,31 +23,11 @@ export const editUser = async (name, email, password) => {
   return res;
 };
 
-// export const showProfile = async (name, email) => {
-//   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
-//   console.log("data");
-
-//   const res = await axios.get(
-//     `${BASE_URL}/showProfile`,
-//     {
-//       name,
-//       email,
-//     },
-//     {
-//       headers: {
-//         Authorization: `Bearer ${user?.access_token}`,
-//       },
-//     }
-//   );
-
-//   return res;
-// };
-
 export const deleteAccount = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.delete(`${BASE_URL}/deleteAccount`, {
+  const res = await axios.delete(`http://10.0.2.2:8000/api/auth/deleteAccount`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
