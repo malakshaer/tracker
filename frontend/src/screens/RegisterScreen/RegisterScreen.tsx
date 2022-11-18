@@ -22,17 +22,17 @@ const RegisterScreen = (props: RegisterScreenProps) => {
   const goToLogInScreen = () => props.navigation.navigate("Login");
   const [loading, setLoading] = useState(false);
 
-  const [name, setName] = useState("malakshaer");
-  const [email, setEmail] = useState("malakshaer@gmail.com");
-  const [password, setPassword] = useState("12345678910k");
-  // const [verifyPassword, setVerifyPassword] = useState("12345678910k");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifyPassword, setVerifyPassword] = useState("");
 
   const dispatch = useDispatch();
 
   const handleRegister = async () => {
     try {
       setLoading(true);
-      const res = await register(name, email, password);
+      const res = await register(name, email, password,verifyPassword);
       console.log(res);
 
       dispatch(addUser(res?.data));
@@ -74,14 +74,14 @@ const RegisterScreen = (props: RegisterScreenProps) => {
           value={password}
           placeholder={"Password"}
         />
-        {/* <TextInput
+        <TextInput
           style={styles.input}
           textContentType="password"
           onChangeText={setVerifyPassword}
           value={verifyPassword}
           secureTextEntry
           placeholder={"Verify Password"}
-        /> */}
+        />
         {loading && <Loading />}
       </View>
       <TouchableOpacity
