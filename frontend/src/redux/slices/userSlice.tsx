@@ -28,10 +28,9 @@ const userSlice = createSlice({
         state.userProfile = action.payload.userProfile
         
         // asyncStorageManager.setItem("userProfile", action.payload.userProfile)
-    },
-    set: (state, action) => action.payload
+    },    
   },
 });
 
-export const { addUser, deleteUser, updateUserProfile, set } = userSlice.actions
+export const { addUser, deleteUser, updateUserProfile} = userSlice.actions
 export default userSlice.reducer
