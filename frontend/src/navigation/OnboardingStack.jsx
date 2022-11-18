@@ -38,7 +38,7 @@ export function OnboardingStack() {
           component={RegisterScreen}
           options={{ title: "Tracker" }}
         />
-        <Stack.Screen name={"Tab"} component={TabStack} />
+        {/* <Stack.Screen name={"Tab"} component={TabStack} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
