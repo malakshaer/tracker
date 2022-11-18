@@ -7,7 +7,7 @@ export const getAllNotifications = async () => {
 
   const res = await axios.get(`http://10.0.2.2:8000/api/auth/getAllNotifications`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -20,7 +20,7 @@ export const getSingleNotification = async (data: number) => {
 
   const res = await axios.get(`http://10.0.2.2:8000/api/auth/getSingleNotification/${data}`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -33,7 +33,7 @@ export const readNotification = async (data: number) => {
 
   const res = await axios.put(`http://10.0.2.2:8000/api/auth/readNotification/${data}`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -46,7 +46,7 @@ export const sendNewNotification = async () => {
 
   const res = await axios.post(`http://10.0.2.2:8000/api/auth/sendNotification`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -59,7 +59,7 @@ export const deleteNotification = async (data: number) => {
 
   const res = await axios.delete(`http://10.0.2.2:8000/api/auth/deleteNotification/${data}`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -72,7 +72,7 @@ export const deleteAllNotifications = async () => {
 
   const res = await axios.delete(`http://10.0.2.2:8000/api/auth/deleteAllNotifications`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
