@@ -1,4 +1,10 @@
-import React, { useReducer, useState, useContext, useEffect } from "react";
+import React, {
+  useCallback,
+  useReducer,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
 import {
   View,
   Text,
@@ -12,87 +18,131 @@ import Icon from "react-native-vector-icons/Ionicons";
 import CarComponent from "../../../components/CarComponent/CarComponent";
 import ModalPopup from "../../../components/Modal/Modal";
 import { TextInput } from "react-native-gesture-handler";
-// import { createNewCar } from "../../../api/carApi";
-// import { editUser } from "../../../api/userApi";
+
 import { editCar } from "../../../api/carApi";
 import { deleteCar } from "../../../api/carApi";
-import axios from "axios";
-const BASE_URL = "https://127.0.0.1:8000/api/auth";
-import UserContext from "../../../../App";
+
 import add from "../../../../assets/add.png";
+import { set } from "../../../redux/slices/userSlice";
+import Loading from "../../../components/Loading/Loading";
+import { profile } from "../../../api/authApi";
+import { createNewCar } from "../../../api/carApi";
+import { editUser } from "../../../api/userApi";
+import { getAllCars } from "../../../api/carApi";
 
 const ProfileScreen = () => {
   const [visibleEditProfile, setVisibleEditProfile] = useState(false);
   const [visibleAddVehicle, setVisibleAddVehicle] = useState(false);
   const [visibleEditVehicle, setVisibleEditVehicle] = useState(false);
 
-  const [iconName, setIconName] = React.useState("checkmark-circle-outline");
+  // const [iconName, setIconName] = React.useState("checkmark-circle-outline");
 
-  const id = useContext(UserContext);
-  const [cars, setCars] = useState([]);
-
-  const [name, setName] = useState("Malak Shaer");
-  const [email, setEmail] = useState("malakshaer@gmail.com");
-  const [password, setPassword] = useState("");
+  const [cars, setCars] = useState([
+    {
+      carName: "BMW",
+    },
+    {
+      carName: "TOYOTA COROLLA",
+    },
+    {
+      carName: "MERCEDES",
+    },
+  ]);
 
   const [carName, setCarName] = useState();
   const [pin, setPin] = useState();
 
-  const createNewCar = () => {
-    const data = {
-      carName: carName,
-      pin: pin,
-    };
-    axios({
-      method: "POST",
-      data,
-      url: `${BASE_URL}/createNewCar/${id}`,
-    })
-      .then((res) => {
-        console.log(res);
-        setCars([...cars, res.data]);
-      })
-      .catch((error) => console.log(error));
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [_profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const createCar = async () => {
+    try {
+      const res = await createNewCar(carName, pin);
+      console.log(res);
+      dispatch(set(res?.data));
+      const user = await AsyncStorage.setItem(
+        "user",
+        JSON.stringify(res?.data)
+      );
+
+      if (res?.status === 200) {
+        alert("Car successfully added");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const editUser = () => {
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-    };
-    axios({
-      method: "PUT",
-      data,
-      url: `${BASE_URL}/editUser/${id}`,
-    })
-      .then((res) => {
-        console.log(res);
-        setName(name);
-        setEmail(email);
-        setPassword(password);
-      })
-      .catch((error) => console.log(error));
-  };
+  const handleEditUser = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await editUser(name, email, password);
+
+      props.navigation.goBack();
+      return res;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [name, email, password]);
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${BASE_URL}/showProfile/${id}`,
-    }).then((res) => {
-      setName(res.data);
-      setEmail(res.data);
-    });
+    const getData = async () => {
+      try {
+        const getProfile = await profile();
+        setProfile(getProfile?.data);
+        setLoading(true);
+        console.log(getProfile?.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const getCars = await getAllCars();
+        setCars(getCars?.data);
+        setLoading(true);
+        console.log(getCars?.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
   }, []);
 
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.containerOne}>
-          {/* <Image style={styles.image} source={userProfile} /> */}
+          {/* <Image
+            source={{ uri: `http://10.0.2.2:8000/storage/${_profile?.image}` }}
+            style={{
+              width: 70,
+              height: 70,
+              borderRadius: 100,
+              margin: 20,
+              marginRight: 0,
+            }}
+          /> */}
           <View style={{ paddingLeft: 40 }}>
-            <Text style={styles.userName}>{name}</Text>
-            {/* <Text style={{ color: "#1648AD" }}>{carStatus}Active</Text> */}
+            <Text style={styles.userName}>{_profile?.name}MalakShaer</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -109,7 +159,7 @@ const ProfileScreen = () => {
             color={"#1648AD"}
             style={{ paddingHorizontal: 10 }}
           />
-          <Text>{email}</Text>
+          <Text>{_profile?.email}malakshaer@gmail.com</Text>
         </View>
 
         <View
@@ -120,25 +170,16 @@ const ProfileScreen = () => {
           }}
         />
         <View>
-          <Text style={styles.titleVehicle}>Your Vehicles:</Text>
-          {cars.map((car) => {
-            // console.warn(car);
-            return (
+          {loading ? (
+            <Loading />
+          ) : (
+            cars.map((car) => (
               <CarComponent
-                key={car._id}
-                carId={car._id}
                 carName={car.carName}
+                onPress={() => setVisibleEditVehicle(true)}
               />
-            );
-          })}
-          <CarComponent
-            carName={"Toyota"}
-            onPress={() => setVisibleEditVehicle(true)}
-          />
-          <CarComponent
-            carName={"BMW"}
-            onPress={() => setVisibleEditVehicle(true)}
-          />
+            ))
+          )}
         </View>
       </ScrollView>
 
@@ -169,30 +210,33 @@ const ProfileScreen = () => {
           <View style={styles.option}>
             <TextInput
               style={styles.textPopUp}
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
+              onChangeText={setName}
+              placeholder={_profile?.name}
+              defaultValue={_profile?.name}
             ></TextInput>
             <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
           </View>
           <View style={styles.option}>
             <TextInput
               style={styles.textPopUp}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChangeText={setEmail}
+              placeholder={_profile?.email}
+              defaultValue={_profile?.email}
             ></TextInput>
             <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
           </View>
           <View style={styles.option}>
             <TextInput
               style={styles.textPopUp}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChangeText={setPassword}
+              placeholder={_profile?.password}
+              defaultValue={_profile?.password}
             ></TextInput>
             <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => editUser()}
+            onPress={() => handleEditUser()}
             style={styles.appButtonContainer}
           >
             <Text style={styles.appButtonText}>Save</Text>
@@ -222,12 +266,19 @@ const ProfileScreen = () => {
           <View style={styles.option}>
             <TextInput
               style={styles.textPopUp}
-              placeholder="Car Name/Type"
+              onChangeText={setCarName}
+              value={carName}
+              placeholder={"Car Name/Type"}
             ></TextInput>
             <Icon name={"add"} size={30} color={"#032955"} />
           </View>
           <View style={styles.option}>
-            <TextInput style={styles.textPopUp} placeholder="PIN"></TextInput>
+            <TextInput
+              style={styles.textPopUp}
+              onChangeText={setPin}
+              value={pin}
+              placeholder={"PIN"}
+            ></TextInput>
             <Icon name={"add"} size={30} color={"#032955"} />
           </View>
           {/* <View style={styles.default}>
@@ -251,7 +302,7 @@ const ProfileScreen = () => {
 
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => createNewCar()}
+            onPress={() => createCar()}
             style={styles.appButtonContainer}
           >
             <Text style={styles.appButtonText}>Add</Text>
