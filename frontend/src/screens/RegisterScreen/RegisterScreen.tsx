@@ -11,6 +11,7 @@ import { NavigationActions } from "react-navigation";
 import { register } from "../../api/authApi";
 import { set } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import Loading from "../../components/Loading/Loading";
 
 interface RegisterScreenProps {
   navigation;
@@ -19,17 +20,19 @@ interface RegisterScreenProps {
 const RegisterScreen = (props: RegisterScreenProps) => {
 
   const goToLogIn = () => props.navigation.navigate("Login");
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("malakshaer");
   const [email, setEmail] = useState("malakshaer@gmail.com");
   const [password, setPassword] = useState("12345678910k");
-  const [verifyPassword, setVerifyPassword] = useState("12345678910k");
+  // const [verifyPassword, setVerifyPassword] = useState("12345678910k");
 
   const dispatch = useDispatch();
 
   const handleRegister = async () => {
     try {
-      const res = await register(name, email, password, verifyPassword);
+      setLoading(true);
+      const res = await register(name, email, password);
       console.log(res);
 
       dispatch(set(res?.data));
@@ -38,9 +41,11 @@ const RegisterScreen = (props: RegisterScreenProps) => {
         JSON.stringify(res?.data)
       );
 
-      props.navigation.navigate("MapScreen");
+      props.navigation.navigate("TabStack");
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -69,14 +74,15 @@ const RegisterScreen = (props: RegisterScreenProps) => {
           value={password}
           placeholder={"Password"}
         />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           textContentType="password"
           onChangeText={setVerifyPassword}
           value={verifyPassword}
           secureTextEntry
           placeholder={"Verify Password"}
-        />
+        /> */}
+        {loading && <Loading />}
       </View>
       <TouchableOpacity
         activeOpacity={0.5}
