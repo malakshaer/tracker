@@ -8,9 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { NavigationActions } from "react-navigation";
-import validateInput from "./registerValidation";
-import RegisterNewUser from "./registerValidation";
-
 import { register } from "../../api/authApi";
 import { set } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
