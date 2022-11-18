@@ -142,14 +142,14 @@ const ProfileScreen = () => {
             }}
           /> */}
           <View style={{ paddingLeft: 40 }}>
-            <Text style={styles.userName}>{_profile?.name}MalakShaer</Text>
+            <Text style={styles.userName}>{_profile?.name}</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setVisibleEditProfile(true)}
             style={styles.editButton}
           >
-            <Text style={styles.buttonText}>Edit Profile</Text>
+            <Text style={styles.buttonText}></Text>
           </TouchableOpacity>
         </View>
         <View style={styles.containerTwo}>
