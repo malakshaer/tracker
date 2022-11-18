@@ -1,12 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-const BASE_URL = "http://127.0.0.1:8000/api/auth";
 
 export const getAllNotifications = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.get(`${BASE_URL}/getAllNotifications`, {
+  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getAllNotifications`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
@@ -15,11 +14,11 @@ export const getAllNotifications = async () => {
   return res;
 };
 
-export const getSingleNotification = async (data) => {
+export const getSingleNotification = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.get(`${BASE_URL}/getSingleNotification/${data}`, {
+  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getSingleNotification`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
