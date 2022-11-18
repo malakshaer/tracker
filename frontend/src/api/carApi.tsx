@@ -15,11 +15,11 @@ export const getAllCars = async () => {
   return res;
 };
 
-export const getCar = async () => {
+export const getCar = async (data: number) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getCar`, {
+  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getCar/${data}`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
@@ -48,12 +48,12 @@ export const createNewCar = async (carName, pin) => {
   return res;
 };
 
-export const editCar = async (carName, pin) => {
+export const editCar = async (carName, pin,data) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.put(
-    `http://10.0.2.2:8000/api/auth/editCar`,
+    `http://10.0.2.2:8000/api/auth/editCar/${data}`,
     {
       carName,
       pin,
@@ -68,12 +68,12 @@ export const editCar = async (carName, pin) => {
   return res;
 };
 
-export const changeCarStatus = async (status) => {
+export const changeCarStatus = async (status,data) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.put(
-    `http://10.0.2.2:8000/api/auth/changeCarStatus`,
+    `http://10.0.2.2:8000/api/auth/changeCarStatus/${data}`,
     {
       status,
     },
@@ -104,12 +104,12 @@ export const deleteAllCars = async () => {
   return res;
 };
 
-export const deleteCar = async () => {
+export const deleteCar = async (data) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.delete(
-    `http://10.0.2.2:8000/api/auth/deleteCar`,
+    `http://10.0.2.2:8000/api/auth/deleteCar/${data}`,
 
     {
       headers: {
