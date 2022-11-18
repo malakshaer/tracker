@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useNavigation } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,14 @@ import { register } from "../../api/authApi";
 import { set } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 
-const RegisterScreen = ({ navigation }) => {
+interface RegisterScreenProps {
+  navigation;
+}
+
+const RegisterScreen = (props: RegisterScreenProps) => {
+
+  const goToLogIn = () => props.navigation.navigate("Login");
+
   const [name, setName] = useState("malakshaer");
   const [email, setEmail] = useState("malakshaer@gmail.com");
   const [password, setPassword] = useState("12345678910k");
@@ -76,7 +83,7 @@ const RegisterScreen = ({ navigation }) => {
       </View>
       <TouchableOpacity
         activeOpacity={0.5}
-        handlePress={handleRegister}
+        onPress={handleRegister}
         style={styles.appButtonContainer}
       >
         <Text style={styles.appButtonText}>Create</Text>
@@ -84,7 +91,7 @@ const RegisterScreen = ({ navigation }) => {
 
       <View style={{ flexDirection: "row", marginTop: 20 }}>
         <Text style={styles.appButtonText}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={goToLogIn}>
           <Text style={styles.navText}>Login</Text>
         </TouchableOpacity>
       </View>
