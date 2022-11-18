@@ -2,12 +2,9 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { readNotification } from "../../api/notificationsApi";
-import UserContext from "../../../App";
 
 const NotificationComponent = ({ time, text }) => {
   const [iconName, setIconName] = React.useState("checkmark-circle-outline");
-
-  const userId = React.useContext(UserContext);
 
   return (
     <View>
@@ -21,7 +18,7 @@ const NotificationComponent = ({ time, text }) => {
               color={"#032955"}
               onPress={() => {
                 if (iconName == "checkmark-circle-outline") {
-                  readNotification(userId);
+                  readNotification();
                   setIconName("checkmark-circle");
                 }
                 // if (iconName == "checkmark-circle") {
