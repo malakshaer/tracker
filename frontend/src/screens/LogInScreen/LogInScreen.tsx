@@ -13,6 +13,7 @@ import { login } from "../../api/authApi";
 import "localstorage-polyfill";
 import Loading from "../../components/Loading/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import TabStack from "../../navigation/TabStack";
 
 interface loginScreenProps {
   navigation;
@@ -38,7 +39,8 @@ const LogInScreen = (props: loginScreenProps) => {
       );
 
       if (res?.status === 200) {
-        props.navigation.navigate("MapScreen");
+        props.navigation.navigate("Map");
+        
       }
     } catch (error) {
       console.log(error);
