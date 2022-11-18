@@ -20,7 +20,7 @@ interface loginScreenProps {
 }
 
 const LogInScreen = (props: loginScreenProps) => {
-  const goToRegister = () => props.navigation.navigate("Register");
+  const goToRegisterScreen = () => props.navigation.navigate("Register");
 
   const [loading, setLoading] = useState(false);
 
@@ -78,7 +78,7 @@ const LogInScreen = (props: loginScreenProps) => {
       </TouchableOpacity>
       <View style={{ flexDirection: "row", marginTop: 20 }}>
         <Text style={styles.appButtonText}>Don't have an account? </Text>
-        <TouchableOpacity onPress={goToRegister}>
+        <TouchableOpacity onPress={goToRegisterScreen}>
           <Text style={styles.navText}>Register</Text>
         </TouchableOpacity>
       </View>
