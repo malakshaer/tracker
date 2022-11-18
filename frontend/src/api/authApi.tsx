@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-const BASE_URL = "http://10.0.2.2:8000/api/auth";
+
 
 export interface loginProps {
   name?: string
@@ -9,7 +9,7 @@ export interface loginProps {
 }
 
 export const login = async (email, password) => {
-  const res = axios.post(`${BASE_URL}/login`, {
+  const res = axios.post(`http://10.0.2.2:8000/api/auth/login`, {
     email,
     password,
   });
@@ -20,20 +20,20 @@ export const register = async (
   name,
   email,
   password,
-  password_confirmation
+  // password_confirmation
 ) => {
-  const res = axios.post(`${BASE_URL}/register`, {
+  const res = axios.post(`http://10.0.2.2:8000/api/auth/register`, {
     name,
     email,
     password,
-    password_confirmation,
+    // password_confirmation,
   });
   return res;
 };
 
 export const showProfile = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
-  const res = axios.get(`${BASE_URL}/showProfile`, {
+  const res = axios.get(`http://10.0.2.2:8000/api/auth/showProfile`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
