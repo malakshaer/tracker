@@ -39,7 +39,7 @@ const LogInScreen = (props: loginScreenProps) => {
       );
 
       if (res?.status === 200) {
-        props.navigation.navigate("Map");
+        props.navigation.navigate("Tab");
         
       }
     } catch (error) {
