@@ -1,12 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-const BASE_URL = "http://127.0.0.1:8000/api/auth";
+
 
 export const getAllCars = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.get(`${BASE_URL}/getAllCars`, {
+  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getAllCars`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
@@ -15,11 +15,11 @@ export const getAllCars = async () => {
   return res;
 };
 
-export const getCar = async (data) => {
+export const getCar = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
-  const res = await axios.get(`${BASE_URL}/getCar/${data}`, {
+  const res = await axios.get(`http://10.0.2.2:8000/api/auth/getCar`, {
     headers: {
       Authorization: `Bearer ${user?.access_token}`,
     },
@@ -47,14 +47,14 @@ export const createNewCar = async (carName, pin) => {
   return res;
 };
 
-export const editCar = async (name, pin, data) => {
+export const editCar = async (carName, pin) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.put(
-    `${BASE_URL}/editCar/${data}`,
+    `http://10.0.2.2:8000/api/auth/editCar`,
     {
-      name,
+      carName,
       pin,
     },
     {
@@ -67,12 +67,12 @@ export const editCar = async (name, pin, data) => {
   return res;
 };
 
-export const changeCarStatus = async (status, data) => {
+export const changeCarStatus = async (status) => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.put(
-    `${BASE_URL}/changeCarStatus/${data}`,
+    `http://10.0.2.2:8000/api/auth/changeCarStatus`,
     {
       status,
     },
@@ -91,7 +91,7 @@ export const deleteAllCars = async () => {
   console.log("data");
 
   const res = await axios.delete(
-    `${BASE_URL}/deleteAllCars`,
+    `http://10.0.2.2:8000/api/auth/deleteAllCars`,
 
     {
       headers: {
@@ -103,12 +103,12 @@ export const deleteAllCars = async () => {
   return res;
 };
 
-export const deleteCar = async (data) => {
+export const deleteCar = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   console.log("data");
 
   const res = await axios.delete(
-    `${BASE_URL}/deleteCar/${data}`,
+    `http://10.0.2.2:8000/api/auth/deleteCar`,
 
     {
       headers: {
