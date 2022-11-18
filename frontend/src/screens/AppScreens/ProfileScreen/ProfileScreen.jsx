@@ -149,7 +149,7 @@ const ProfileScreen = () => {
             onPress={() => setVisibleEditProfile(true)}
             style={styles.editButton}
           >
-            <Text style={styles.buttonText}></Text>
+            <Text style={styles.buttonText}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.containerTwo}>
@@ -159,7 +159,7 @@ const ProfileScreen = () => {
             color={"#1648AD"}
             style={{ paddingHorizontal: 10 }}
           />
-          <Text>{_profile?.email}malakshaer@gmail.com</Text>
+          <Text>{_profile?.email}</Text>
         </View>
 
         <View
