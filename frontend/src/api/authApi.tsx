@@ -31,7 +31,8 @@ export const register = async (
   return res;
 };
 
-export const showProfile = async () => {
+//Show Profile
+export const profile = async () => {
   const user = JSON.parse((await AsyncStorage.getItem("user")) || "");
   const res = axios.get(`http://10.0.2.2:8000/api/auth/showProfile`, {
     headers: {
