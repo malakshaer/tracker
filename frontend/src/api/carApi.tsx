@@ -40,6 +40,7 @@ export const createNewCar = async (carName, pin) => {
     {
       headers: {
         Authorization: `Bearer ${user?.access_token}`,
+        'content-type': 'application/x-www-form-urlencoded' 
       },
     }
   );
