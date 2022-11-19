@@ -23,9 +23,9 @@ class UserController extends Controller
     // }
 
     //Show User Profile
-    public function showProfile($id)
+    public function showProfile()
     {
-        return User::where("id", $id)->get();
+        return response()->json(auth()->user());
     }
 
     //Edit or update user
