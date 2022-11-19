@@ -41,17 +41,6 @@ export default function NotificationScreen() {
     },
   ]);
 
-  const showNotifications = () => {
-    firestore()
-      .collection("Notifications")
-      .add({
-        message: message,
-      })
-      .then(() => {
-        console.log(data);
-      });
-  };
-
   useEffect(() => {
     axios({
       method: "GET",
