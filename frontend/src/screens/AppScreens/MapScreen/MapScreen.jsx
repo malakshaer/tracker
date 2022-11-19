@@ -15,7 +15,7 @@ import MapViewDirections from "react-native-maps-directions";
 import Loader from "../../../components/Loader/Loader";
 import { locationPermission, getCurrentLocation } from "./helperFunction";
 import logoMarker from "../../../../assets/logo-marker.png";
-import { sendNewNotification } from "../../../api/notificationsApi";
+import { sendNewNotification } from "../../../api/notificationFirebase";
 import sendNotification from "../NotificationScreen/NotificationScreen";
 import locate from "../../../../assets/locate.png";
 import * as Location from "expo-location";
