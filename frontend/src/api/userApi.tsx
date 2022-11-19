@@ -14,7 +14,7 @@ export const editUser = async (name, email, password) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
         'content-type': 'application/x-www-form-urlencoded' 
       },
     }
@@ -29,7 +29,7 @@ export const deleteAccount = async () => {
 
   const res = await axios.delete(`http://10.0.2.2:8000/api/auth/deleteAccount`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
