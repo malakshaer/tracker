@@ -8,7 +8,7 @@ export const getAllCars = async () => {
 
   const res = await axios.get(`http://10.0.2.2:8000/api/auth/getAllCars`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -21,7 +21,7 @@ export const getCar = async (data: number) => {
 
   const res = await axios.get(`http://10.0.2.2:8000/api/auth/getCar/${data}`, {
     headers: {
-      Authorization: `Bearer ${user?.access_token}`,
+      Authorization: `Bearer ${user?.token}`,
     },
   });
 
@@ -39,7 +39,7 @@ export const createNewCar = async (carName, pin) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
         'content-type': 'application/x-www-form-urlencoded' 
       },
     }
@@ -60,7 +60,7 @@ export const editCar = async (carName, pin,data) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );
@@ -79,7 +79,7 @@ export const changeCarStatus = async (status,data) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );
@@ -96,7 +96,7 @@ export const deleteAllCars = async () => {
 
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );
@@ -113,7 +113,7 @@ export const deleteCar = async (data) => {
 
     {
       headers: {
-        Authorization: `Bearer ${user?.access_token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );
