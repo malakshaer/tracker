@@ -13,8 +13,8 @@ import Constants from "expo-constants";
 import storage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/Ionicons";
 import NotificationComponent from "../../../components/Notifications/NotificationComponent";
-import readNotification from "../../../api/notificationsApi";
-
+import { readNotification } from "../../../api/notificationFirebase";
+import { getAllNotifications } from "../../../api/notificationFirebase";
 import axios from "axios";
 import EmptyStateView from "@tttstudios/react-native-empty-state";
 import logo from "../../../../assets/logo-marker.png";
@@ -30,6 +30,7 @@ Notifications.setNotificationHandler({
 
 export default function NotificationScreen() {
   const [notification, setNotification] = useState(false);
+  const [notifications, setNotifications] = useState();
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -42,17 +43,19 @@ export default function NotificationScreen() {
   ]);
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: `http://10.0.2.2:8000/api/auth/getAllNotifications`,
-    })
-      .then((res) => {
-        setMessages(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
+    const getData = async () => {
+      try {
+        const getNotify = await getAllNotifications();
+        setNotifications(getNotify?.data);
+        setLoading(true);
+        console.log(getNotify?.data);
+      } catch (error) {
         console.log(error);
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
   }, []);
 
   //Get permission for notification
@@ -152,7 +155,6 @@ export default function NotificationScreen() {
               ))
             )}
           </View>
-          {/* const date = new Date(msg.created_at); */}
 
           {/* <TouchableOpacity onPress={sendNotification}>
             <Text
