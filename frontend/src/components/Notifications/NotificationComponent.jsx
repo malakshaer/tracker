@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { readNotification } from "../../api/notificationsApi";
+import { readNotification } from "../../../api/notificationFirebase";
 
-const NotificationComponent = ({ time, text }) => {
+const NotificationComponent = ({ time, text, id }) => {
   const [iconName, setIconName] = React.useState("checkmark-circle-outline");
 
   return (
@@ -18,7 +18,7 @@ const NotificationComponent = ({ time, text }) => {
               color={"#032955"}
               onPress={() => {
                 if (iconName == "checkmark-circle-outline") {
-                  readNotification();
+                  readNotification(id);
                   setIconName("checkmark-circle");
                 }
                 // if (iconName == "checkmark-circle") {
