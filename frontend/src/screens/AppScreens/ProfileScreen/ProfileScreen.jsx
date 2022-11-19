@@ -26,7 +26,7 @@ import add from "../../../../assets/add.png";
 import { set } from "../../../redux/slices/userSlice";
 import Loading from "../../../components/Loading/Loading";
 import { profile } from "../../../api/authApi";
-import { createNewCar } from "../../../api/carApi";
+import createNewCar from "../../../api/carFirebase";
 import { editUser } from "../../../api/userApi";
 import { getAllCars } from "../../../api/carApi";
 
@@ -40,12 +40,15 @@ const ProfileScreen = () => {
   const [cars, setCars] = useState([
     {
       carName: "BMW",
+      pin: "1234KIA54321",
     },
     {
       carName: "TOYOTA COROLLA",
+      pin: "1234KIA54321",
     },
     {
       carName: "MERCEDES",
+      pin: "1234KIA54321",
     },
   ]);
 
@@ -61,24 +64,6 @@ const ProfileScreen = () => {
 
   const [_profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const createCar = async () => {
-    try {
-      const res = await createNewCar(carName, pin);
-      console.log(res);
-      dispatch(set(res?.data));
-      const user = await AsyncStorage.setItem(
-        "user",
-        JSON.stringify(res?.data)
-      );
-
-      if (res?.status === 200) {
-        alert("Car successfully added");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleEditUser = useCallback(async () => {
     try {
@@ -176,6 +161,7 @@ const ProfileScreen = () => {
             cars.map((car) => (
               <CarComponent
                 carName={car.carName}
+                pin={car.pin}
                 onPress={() => setVisibleEditVehicle(true)}
               />
             ))
@@ -302,7 +288,7 @@ const ProfileScreen = () => {
 
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => createCar()}
+            onPress={() => createNewCar(carName, pin)}
             style={styles.appButtonContainer}
           >
             <Text style={styles.appButtonText}>Add</Text>
