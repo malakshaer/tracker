@@ -19,8 +19,8 @@ import CarComponent from "../../../components/CarComponent/CarComponent";
 import ModalPopup from "../../../components/Modal/Modal";
 import { TextInput } from "react-native-gesture-handler";
 
-import { editCar } from "../../../api/carApi";
-import { deleteCar } from "../../../api/carApi";
+import { editCar } from "../../../api/carFirebase";
+import { deleteCar } from "../../../api/carFirebase";
 
 import add from "../../../../assets/add.png";
 import { set } from "../../../redux/slices/userSlice";
@@ -28,7 +28,7 @@ import Loading from "../../../components/Loading/Loading";
 import { profile } from "../../../api/authApi";
 import createNewCar from "../../../api/carFirebase";
 import { editUser } from "../../../api/userApi";
-import { getAllCars } from "../../../api/carApi";
+import { getAllCars } from "../../../api/carFirebase";
 
 const ProfileScreen = () => {
   const [visibleEditProfile, setVisibleEditProfile] = useState(false);
