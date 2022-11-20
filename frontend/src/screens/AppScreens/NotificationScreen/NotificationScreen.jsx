@@ -19,6 +19,7 @@ import axios from "axios";
 import EmptyStateView from "@tttstudios/react-native-empty-state";
 import logo from "../../../../assets/logo-marker.png";
 import Loading from "../../../components/Loading/Loading";
+import firestore from "@react-native-firebase/firestore";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -30,12 +31,12 @@ Notifications.setNotificationHandler({
 
 export default function NotificationScreen() {
   const [notification, setNotification] = useState(false);
-  const [notifications, setNotifications] = useState();
+
   const notificationListener = useRef();
   const responseListener = useRef();
 
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState([
+  const [notifications, setNotifications] = useState([
     {
       message: "Your car is active now",
       create_at: "22:10",
@@ -43,19 +44,24 @@ export default function NotificationScreen() {
   ]);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const getNotify = await getAllNotifications();
-        setNotifications(getNotify?.data);
-        setLoading(true);
-        console.log(getNotify?.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
+    const unsubscribe = firestore()
+      .collection("notifications")
+      .onSnapshot((querySnapshot) => {
+        const notifications = querySnapshot.docs.map((documentSnapshot) => {
+          return {
+            _id: documentSnapshot.id,
+            message: "",
+            ...documentSnapshot.data(),
+          };
+        });
+
+        setNotifications(notifications);
+
+        if (loading) {
+          setLoading(false);
+        }
+      });
+    return () => unsubscribe();
   }, []);
 
   //Get permission for notification
@@ -147,11 +153,8 @@ export default function NotificationScreen() {
             {loading ? (
               <Loading />
             ) : (
-              messages.map((msg) => (
-                <NotificationComponent
-                  text={msg.message}
-                  time={msg.create_at}
-                />
+              notifications.map((n) => (
+                <NotificationComponent text={n.message} time={n.create_at} />
               ))
             )}
           </View>
