@@ -97,19 +97,25 @@ const ProfileScreen = () => {
   }, []);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const getCars = await getAllCars();
-        setCars(getCars?.data);
-        setLoading(true);
-        console.log(getCars?.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
+    const unsubscribe = firestore()
+      .collection("cars")
+      .onSnapshot((querySnapshot) => {
+        const cars = querySnapshot.docs.map((documentSnapshot) => {
+          return {
+            _id: documentSnapshot.id,
+            carName: "",
+            pin: "",
+            ...documentSnapshot.data(),
+          };
+        });
+
+        setCars(cars);
+
+        if (loading) {
+          setLoading(false);
+        }
+      });
+    return () => unsubscribe();
   }, []);
 
   return (
