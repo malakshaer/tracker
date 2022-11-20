@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { readNotification } from "../../../api/notificationFirebase";
+import { readNotification } from "../../api/notificationFirebase";
 
 const NotificationComponent = ({ time, text, id }) => {
   const [iconName, setIconName] = React.useState("checkmark-circle-outline");
