@@ -25,11 +25,6 @@ import * as geoLocation from "expo-location";
 import Constants from "expo-constants";
 import Loading from "../../../components/Loading/Loading";
 
-// const screen = Dimensions.get("window");
-// const ASPECT_RATIO = screen.width / screen.height;
-// const LATITUDE_DELTA = 0.04;
-// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
 const MapScreen = () => {
   const [load, setLoad] = useState(false);
   const [myLocation, setMyLocation] = useState({
@@ -46,8 +41,7 @@ const MapScreen = () => {
         return;
       }
 
-      let getLocation = await geoLocation.getCurrentPositionAsync({});
-      //  console.log("my ", getLocation);
+      let getLocation = await geoLocation.getCurrentPositionAsync({});      
       setMyLocation({
         latitude: getLocation.coords.latitude,
         longitude: getLocation.coords.longitude,
@@ -73,15 +67,13 @@ const MapScreen = () => {
           longitudeDelta: 0.0421,
         }}
         showsUserLocation={true}
-        onUserLocationChange={(e) => {
-          //   console.log("e", e.nativeEvent.coordinate);
+        onUserLocationChange={(e) => {          
           // setMyLocation({
           //   longitude: e.nativeEvent.longitude,
           //   latitude: e.nativeEvent.latitude,
           // });
         }}
       >
-        {/* <Marker coordinate={myLocation} title={"Your car is here"} /> */}
         <Marker.Animated coordinate={myLocation}>
             <Image
               source={logoMarker}
@@ -104,14 +96,14 @@ const MapScreen = () => {
           destination={myLocation}
           apikey={GOOGLE_MAP_KEY}
           strokeWidth={3}
-          // strokeColor={colors.darker}
+          // strokeColor={colors}
         />
         <Marker
           coordinate={{
             latitude: 33.88863,
             longitude: 35.49548,
           }}
-          title={"Picker Location"}
+          title={"car Location"}
         />
       </MapView>
 
@@ -131,8 +123,7 @@ const MapScreen = () => {
             }}
           />
         </TouchableOpacity>
-      </View>
-      {/* <Loader isLoading={isLoading} /> */}
+      </View>      
     </SafeAreaView>
   );
 };
