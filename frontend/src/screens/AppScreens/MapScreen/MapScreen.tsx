@@ -11,10 +11,8 @@ import {
 } from "react-native";
 import MapView, { Marker, Callout, AnimatedRegion } from "react-native-maps";
 import { GOOGLE_MAP_KEY } from "../../../constants/googleMapKey";
-import imagePath from "../../../constants/imagePath";
 import MapViewDirections from "react-native-maps-directions";
 import Loader from "../../../components/Loader/Loader";
-import { locationPermission, getCurrentLocation } from "./helperFunction";
 import logoMarker from "../../../../assets/logo-marker.png";
 import { sendNewNotification } from "../../../api/notificationFirebase";
 import sendNotification from "../NotificationScreen/NotificationScreen";
