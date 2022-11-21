@@ -114,8 +114,7 @@ const MapScreen = () => {
             sendNewNotification();
             console.log(`Started routing"`);
           }}
-        />
-        
+        />        
       </MapView>
 
         <TouchableOpacity
