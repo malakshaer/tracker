@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,17 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: "center",
     marginTop: 16,
+  },
+  mainView: {    
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    flex: 1,
+    alignItems: "center",
+    height: "100%",
+  },
+  mapView: {
+    flex: 1,
+    height: "100%",
+    width: "100%",
   },
 });
 
