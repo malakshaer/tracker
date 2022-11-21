@@ -10,6 +10,7 @@ import { deleteAllCars } from "../../../api/carApi";
 import { deleteAccount } from "../../../api/userApi";
 import { deleteUser } from "../../../redux/slices/userSlice";
 import styles from "./SettingsScreenStyles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SettingsScreen = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
@@ -18,8 +19,9 @@ const SettingsScreen = ({ navigation }) => {
   const [visibleSendNotification, setVisibleSendNotification] =
     React.useState(false);
 
-  const handleNavigation = () => {
-    navigation.navigate(LandingScreen);
+  const Logout = () => {
+    AsyncStorage.removeItem("token");
+    navigation.navigate("Landing");
   };
 
   return (
@@ -121,7 +123,7 @@ const SettingsScreen = ({ navigation }) => {
             Are you sure you want to Sign Out?
           </Text>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => handleNavigation()}>
+            <TouchableOpacity onPress={() => Logout()}>
               <Image
                 source={require("../../../../assets/check.png")}
                 style={{ height: 40, width: 40 }}
