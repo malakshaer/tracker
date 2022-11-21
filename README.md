@@ -49,7 +49,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 - For persistent storage (database), the app uses [MySQL](https://www.mysql.com/) for users and [Firebase](https://firebase.google.com/) for Notifications and car location. MySQL is a relational database management system based on SQL – Structured Query Language. Google Firebase is a Google-backed application development software that enables developers to develop iOS, Android and Web apps. Firebase provides tools for tracking analytics, reporting and fixing app crashes, creating marketing and product experiment.
 - To send local push notifications, the app uses the [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/) package which provides an API to fetch push notification tokens and to present, schedule, receive and respond to notifications.
 - For displaying maps and allowing users to see their car's location, the app uses [react-native-maps](https://github.com/react-native-maps/react-native-maps) which is a component system for maps that ships with platform-native code that needs to be compiled together with React Native.
-- For Hardware the app uses [412 ARDUINO SENSOR IR DETECTOR](https://katgates.com/En/product_det/434693) to help implement the live location built with this application.
+- For Hardware the app uses [Arduino UNO](https://store-usa.arduino.cc/products/arduino-uno-rev3?selectedStore=us) and [GPS Module](https://randomnerdtutorials.com/guide-to-neo-6m-gps-module-with-arduino/) to help implement the live location built with this application.
 
 <br><br>
 <img src="./readme/title5.svg"/>
