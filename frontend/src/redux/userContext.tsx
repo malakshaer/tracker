@@ -4,13 +4,13 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
 
-    const [userData, setUserData] = useState([]);
+    const [user, setUser] = useState([]);
 
     return (
         <UserContext.Provider
             value={{
-                userData,
-                setUserData,
+                user,
+                setUser,
             }}
         >
             {children}
