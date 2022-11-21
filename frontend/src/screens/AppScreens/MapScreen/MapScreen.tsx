@@ -25,6 +25,11 @@ import * as geoLocation from "expo-location";
 import Constants from "expo-constants";
 import Loading from "../../../components/Loading/Loading";
 
+const screen = Dimensions.get("window");
+const ASPECT_RATIO = screen.width / screen.height;
+const LATITUDE_DELTA = 0.04;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const MapScreen = () => {
   const [load, setLoad] = useState(false);
   const [myLocation, setMyLocation] = useState({
@@ -61,10 +66,12 @@ const MapScreen = () => {
       <MapView
         style={styles.mapView}
         initialRegion={{
-          latitude: myLocation.latitude,
-          longitude: myLocation.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          // latitude: myLocation.latitude,
+          // longitude: myLocation.longitude,
+          latitude: 33.88863,
+          longitude: 35.49548,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
         }}
         showsUserLocation={true}
         onUserLocationChange={(e) => {          
@@ -74,7 +81,13 @@ const MapScreen = () => {
           // });
         }}
       >
-        <Marker.Animated coordinate={myLocation}>
+        <Marker.Animated
+        //  coordinate={myLocation}
+        coordinate={{
+          latitude: 33.88863,
+          longitude: 35.49548,
+        }}
+         >
             <Image
               source={logoMarker}
               style={{
@@ -88,23 +101,21 @@ const MapScreen = () => {
             </Callout>
           </Marker.Animated>
 
-        <MapViewDirections
-          origin={{
-            latitude: 33.88863,
-            longitude: 35.49548,
-          }}
-          destination={myLocation}
+        <MapViewDirections          
+          origin={myLocation}
           apikey={GOOGLE_MAP_KEY}
-          strokeWidth={3}
-          // strokeColor={colors}
-        />
-        <Marker
-          coordinate={{
-            latitude: 33.88863,
-            longitude: 35.49548,
+          strokeWidth={4}
+          optimizeWaypoints={true}
+          strokeColor= "red"
+          onStart={() => {
+            //push notification
+            sendNotification();
+            //send notification to the server
+            sendNewNotification();
+            console.log(`Started routing"`);
           }}
-          title={"car Location"}
         />
+        
       </MapView>
 
         <TouchableOpacity
@@ -113,7 +124,7 @@ const MapScreen = () => {
             bottom: 10,
             right: 10,
           }}
-          // onPress={onCenter}
+          // onPress={}
         >
           <Image
             source={locate}
