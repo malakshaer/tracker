@@ -8,6 +8,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
+import styles from "./NotificationScreenStyles";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import storage from "@react-native-async-storage/async-storage";
@@ -16,7 +17,6 @@ import NotificationComponent from "../../../components/Notifications/Notificatio
 import { readNotification } from "../../../api/notificationFirebase";
 import { getAllNotifications } from "../../../api/notificationFirebase";
 import axios from "axios";
-import EmptyStateView from "@tttstudios/react-native-empty-state";
 import logo from "../../../../assets/logo-marker.png";
 import Loading from "../../../components/Loading/Loading";
 import firestore from "@react-native-firebase/firestore";
@@ -43,26 +43,27 @@ export default function NotificationScreen() {
     },
   ]);
 
-  useEffect(() => {
-    const unsubscribe = firestore()
-      .collection("notifications")
-      .onSnapshot((querySnapshot) => {
-        const notifications = querySnapshot.docs.map((documentSnapshot) => {
-          return {
-            _id: documentSnapshot.id,
-            message: "",
-            ...documentSnapshot.data(),
-          };
-        });
+  // useEffect(() => {
+  //   const notificationList = firestore()
+  //     .collection("notifications")
+  //     .onSnapshot((querySnapshot) => {
+  //       const notifications = querySnapshot.docs.map((documentSnapshot) => {
+  //         return {
+  //           _id: documentSnapshot.id,
+  //           message: "",
+  //           ...documentSnapshot.data(),
+  //         };
+  //       });
 
-        setNotifications(notifications);
+  //       setNotifications(notifications);
 
-        if (loading) {
-          setLoading(false);
-        }
-      });
-    return () => unsubscribe();
-  }, []);
+  //       if (loading) {
+  //         setLoading(false);
+  //       }
+  //     });
+  //   return () => notificationList();
+  // }, []);
+  
 
   //Get permission for notification
   useEffect(() => {
@@ -172,27 +173,4 @@ export default function NotificationScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-  },
-  note: {
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingVertical: 10,
-  },
-  text: {
-    color: "#032955",
-    fontSize: 16,
-  },
-  headerTextStyle: {
-    color: "rgb(76, 76, 76)",
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  imageStyle: {
-    height: "50%",
-    resizeMode: "contain",
-    marginTop: 100,
-  },
-});
+
