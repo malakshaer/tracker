@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  FlatList,
+  Pressable,
 } from "react-native";
 import styles from "./NotificationScreenStyles";
 import * as Notifications from "expo-notifications";
@@ -19,7 +21,7 @@ import { getAllNotifications } from "../../../api/notificationFirebase";
 import axios from "axios";
 import logo from "../../../../assets/logo-marker.png";
 import Loading from "../../../components/Loading/Loading";
-import firestore from "@react-native-firebase/firestore";
+import { firebase } from "../../../config/firebase";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -42,28 +44,6 @@ export default function NotificationScreen() {
       create_at: "22:10",
     },
   ]);
-
-  // useEffect(() => {
-  //   const notificationList = firestore()
-  //     .collection("notifications")
-  //     .onSnapshot((querySnapshot) => {
-  //       const notifications = querySnapshot.docs.map((documentSnapshot) => {
-  //         return {
-  //           _id: documentSnapshot.id,
-  //           message: "",
-  //           ...documentSnapshot.data(),
-  //         };
-  //       });
-
-  //       setNotifications(notifications);
-
-  //       if (loading) {
-  //         setLoading(false);
-  //       }
-  //     });
-  //   return () => notificationList();
-  // }, []);
-  
 
   //Get permission for notification
   useEffect(() => {
@@ -131,46 +111,58 @@ export default function NotificationScreen() {
     });
   };
 
+  const notificationRef = firebase.firestore().collection("notifications");
+
+  useEffect(() => {
+    notificationRef.onSnapshot((querySnapshot) => {
+      const not = [];
+      querySnapshot.forEach((doc) => {
+        const { message, created_at } = doc.data();
+        not.push({
+          id: doc.id,
+          message,
+          created_at,
+        });
+      });
+      setNotifications(not);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.note}>
-            <Text style={styles.text}>
-              Mark{" "}
-              <Icon name={"checkmark-circle"} size={25} color={"#032955"} />
-              if you made the action
-            </Text>
-          </View>
-          {/* <EmptyStateView
-            enableButton
-            buttonText="Refresh"
-            imageSource={logo}
-            imageStyle={styles.imageStyle}
-            headerText="No Notification yet"
-            headerTextStyle={styles.headerTextStyle}
-          /> */}
-          <View>
-            {loading ? (
-              <Loading />
-            ) : (
-              notifications.map((n) => (
-                <NotificationComponent text={n.message} time={n.create_at} />
-              ))
+      <View style={styles.container}>
+        <View style={styles.note}>
+          <Text style={styles.text}>
+            Mark <Icon name={"checkmark-circle"} size={25} color={"#032955"} />
+            if you made the action
+          </Text>
+        </View>
+        <View>
+          <FlatList
+            style={{ height: "100%" }}
+            data={notifications}
+            numColumns={1}
+            renderItem={({ item }) => (
+              <Pressable>
+                <NotificationComponent
+                  id={item.id}
+                  text={item.message}
+                  time={item.created_at}
+                />
+              </Pressable>
             )}
-          </View>
+          ></FlatList>
+        </View>
+        {loading && <Loading />}
 
-          {/* <TouchableOpacity onPress={sendNotification}>
+        {/* <TouchableOpacity onPress={sendNotification}>
             <Text
               style={{ backgroundColor: "red", padding: 10, color: "white" }}
             >
               Click me to send a push notification
             </Text>
           </TouchableOpacity> */}
-        </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
-
-
