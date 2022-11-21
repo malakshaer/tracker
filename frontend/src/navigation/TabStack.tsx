@@ -9,12 +9,14 @@ import MapScreen from "../screens/AppScreens/MapScreen/MapScreen";
 import ProfileScreen from "../screens/AppScreens/ProfileScreen/ProfileScreen";
 import NotificationScreen from "../screens/AppScreens/NotificationScreen/NotificationScreen";
 import SettingsScreen from "../screens/AppScreens/SettingsScreen/SettingsScreen";
+import LandingScreen from "../screens/LandingScreen/LandingScreen";
 
 //Screen names
 const MapName = "Map";
 const ProfileName = "Profile";
 const NotificationName = "Notification";
 const settingsName = "Settings";
+const Landing = "Landing";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,6 +71,7 @@ function TabStack() {
         <Tab.Screen name={ProfileName} component={ProfileScreen} />
         <Tab.Screen name={NotificationName} component={NotificationScreen} />
         <Tab.Screen name={settingsName} component={SettingsScreen} />
+        <Tab.Screen name={Landing} component={LandingScreen} options={{ headerShown: false, tabBarStyle:{display:"none"} }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
