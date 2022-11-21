@@ -36,6 +36,7 @@ import { getAllCars } from "../../../api/carFirebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import {firebase} from "../../../config/firebase";
+import { UserContext } from "../../../redux/userContext";
 
 const ProfileScreen = ({ props }) => {
   const [visibleEditProfile, setVisibleEditProfile] = useState(false);
@@ -43,18 +44,10 @@ const ProfileScreen = ({ props }) => {
   const [visibleEditVehicle, setVisibleEditVehicle] = useState(false);
 
   const [cars, setCars] = useState([
-    // {
-    //   carName: "BMW",
-    //   pin: "1234KIA54321",
-    // },
-    // {
-    //   carName: "TOYOTA COROLLA",
-    //   pin: "1234KIA54321",
-    // },
-    // {
-    //   carName: "MERCEDES",
-    //   pin: "1234KIA54321",
-    // },
+    {
+      carName: "BMW",
+      pin: "1234KIA54321",
+    },    
   ]);
 
   const [carName, setCarName] = useState();
@@ -65,22 +58,30 @@ const ProfileScreen = ({ props }) => {
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
+  const { user, setUser }  = useContext(UserContext);
+  const carsRef = firebase.firestore().collection('cars');
 
-  const handleEditUser = useCallback(async () => {
-    try {
-      setLoading(true);
-
-      const res = await editUser(name, email, password);
-
-      props.navigation.goBack();
-      return res;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [name, email, password]);
+  const handleEditUser = async (user) => {
+    const data = {
+      name: user.name,
+      email: user.email,      
+    };
+    const token = await AsyncStorage.getItem('token')
+    await axios({
+            headers:{'Authorization':'Bearer '+ token},
+            method:'POST',
+            url: `http://10.0.2.2:8000/api/editUser`,
+            data:data,
+    })
+    .then(function (response) {
+        return true
+    })
+    .catch(function (error) {
+        console.log(error)
+        return false
+    });
+  };
 
   const getProfile = async () => {
     const token = await AsyncStorage.getItem("@token");
@@ -104,8 +105,6 @@ const ProfileScreen = ({ props }) => {
   useEffect(() => {
     getProfile();
   });
-
- const carsRef = firebase.firestore().collection('cars');
 
  useEffect(() => {
   carsRef.onSnapshot(
@@ -171,7 +170,6 @@ const ProfileScreen = ({ props }) => {
                 </Pressable>
               )}>
           </FlatList>
-          
             {/* {loading ? (
               <Loading />
             ) : (
@@ -232,15 +230,16 @@ const ProfileScreen = ({ props }) => {
               <TextInput
                 style={styles.textPopUp}
                 onChangeText={setPassword}
-                placeholder={user.password}
+                placeholder="Edit password"
                 defaultValue={user.password}
               ></TextInput>
               <Icon name={"pencil-sharp"} size={30} color={"#032955"} />
             </View>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => handleEditUser()}
               style={styles.appButtonContainer}
+              onPress={() => handleEditUser(user)}
+              
             >
               <Text style={styles.appButtonText}>Save</Text>
             </TouchableOpacity>
