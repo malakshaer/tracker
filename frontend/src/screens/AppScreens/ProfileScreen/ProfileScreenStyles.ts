@@ -28,11 +28,14 @@ const styles = StyleSheet.create({
   },
   editButton: {
     elevation: 8,
+    position: "absolute",
     backgroundColor: "#1648AD",
     borderRadius: 50,
     paddingVertical: 10,
-    marginHorizontal: 80,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20, 
+    right: 20,
+    top: 10,
+       
   },
   buttonText: {
     fontSize: 18,
@@ -99,6 +102,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+  textPopUp: {
+    fontSize: 18,
+    color: "#1648AD",
   },
 });
 
