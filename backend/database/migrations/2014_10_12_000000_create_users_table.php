@@ -18,10 +18,20 @@ return new class extends Migration
             $table->string("profile_image");
             $table->timestamps();
         });
+
+        Schema::create('cars', function (Blueprint $table) {
+            $table->id();
+            $table->string('carName');
+            $table->string('pin');
+            $table->string('longitude');
+            $table->string('latitude');
+            $table->timestamps();
+        });
     }
 
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('cars');
     }
 };
