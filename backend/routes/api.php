@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CarController;
+use App\Http\Controllers\CarsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AuthController;
 
@@ -31,12 +31,21 @@ Route::group(["prefix" => "auth"], function () {
             Route::delete('/deleteAllNotifications', 'deleteAllNotifications');
         });
 
-        Route::controller(CarController::class)->group(function () {
+        // Route::controller(CarController::class)->group(function () {
+        //     Route::post('/createNewCar', 'createNewCar');
+        //     Route::get('/getAllCars', 'getAllCars');
+        //     Route::get('/getCar/{id}', 'getCar');
+        //     Route::put('/editCar/{id}', 'editCar');
+        //     Route::put('/changeCarStatus/{id}', 'changeCarStatus'); //
+        //     Route::delete('/deleteAllCars', 'deleteAllCars');
+        //     Route::delete('/deleteCar/{id}', 'deleteCar');
+        // });
+
+        Route::controller(CarsController::class)->group(function () {
             Route::post('/createNewCar', 'createNewCar');
             Route::get('/getAllCars', 'getAllCars');
             Route::get('/getCar/{id}', 'getCar');
             Route::put('/editCar/{id}', 'editCar');
-            Route::put('/changeCarStatus/{id}', 'changeCarStatus'); //
             Route::delete('/deleteAllCars', 'deleteAllCars');
             Route::delete('/deleteCar/{id}', 'deleteCar');
         });
