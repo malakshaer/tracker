@@ -41,7 +41,7 @@ const RegisterScreen = (props: RegisterScreenProps) => {
         JSON.stringify(res?.data)
       );
 
-      props.navigation.navigate("Tab");
+      props.navigation.navigate("Login");
     } catch (error) {
       console.log(error);
     } finally {
