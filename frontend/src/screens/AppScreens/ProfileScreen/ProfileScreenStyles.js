@@ -28,11 +28,13 @@ const styles = StyleSheet.create({
   },
   editButton: {
     elevation: 8,
+    position: "absolute",
     backgroundColor: "#1648AD",
     borderRadius: 50,
     paddingVertical: 10,
-    marginHorizontal: 80,
     paddingHorizontal: 20,
+    right: 20,
+    top: 30,
   },
   buttonText: {
     fontSize: 18,
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
     marginLeft: 320,
     bottom: 10,
     right: 20,
+    // zIndex: 10000,
   },
   titleVehicle: {
     marginLeft: 20,
@@ -99,6 +102,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+  textPopUp: {
+    fontSize: 18,
+    color: "#1648AD",
+  },
+  yourVehicle: {
+    fontSize: 18,
+    color: "#1648AD",
+    fontWeight: "bold",
+    marginLeft: 20,
+    marginVertical: 10,
+  },
+  uploadImage: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    color: "#1648AD",
+    marginVertical: 10,
+  },
+  vehiclesHeader: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  addCarButton: {
+    elevation: 8,
+    backgroundColor: "#1648AD",
+    borderRadius: 50,
+    color: "#fff",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
 });
 
