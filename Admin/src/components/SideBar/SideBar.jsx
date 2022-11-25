@@ -20,29 +20,6 @@ const SideBar = () => {
           <img src={logo} alt="logo" />
         </div>
         <div className="sidebar-menu">
-          {/* <Link
-            to={"/home"}
-            onClick={() => {
-              setActiveStats("inactive");
-            }}
-          >
-            <div
-              className={`sidebar-menu-item
-            ${activeHome}
-            `}
-            > */}
-          {/* <div className="sidebar-menu-item-icon">
-                <MaterialIcon icon="home" size={"large"} color="#ffffff" />
-              </div> */}
-          {/* <div
-                className={`sidebar-menu-item-text ${activeHome}
-            `}
-              >
-                Home
-              </div> */}
-          {/* </div>
-          </Link> */}
-
           <Link
             to={"/stats"}
             onClick={() => {
@@ -62,7 +39,6 @@ const SideBar = () => {
               </div>
             </div>
           </Link>
-
           <Link
             to={"access"}
             onClick={() => {
