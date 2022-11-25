@@ -14,7 +14,7 @@
 
 > Tracker Application is a car tracker application with a real time GPS tracking system for vehicles, that alert the users if their cars is being robbed
 >
-> Whenever the car is active a push notification is sent to the users alerting them that their cars is moving now, so if they did the action they check ok on the notification if not they can track the car to see its path.
+> Whenever the car is active a push notification is sent to the users alerting them that their cars is moving now,and can track the car to see its path.
 
 ### User Stories
 
@@ -46,6 +46,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 - Frontend: This project uses the [React Native Framework](https://reactnative.dev/). React native is an open-source JavaScript framework, designed for building apps on multiple platforms like iOS, Android, and also web applications, utilizing the very same code base. It is based on React, and it brings all its glory to mobile app development.
 - Backend: The backend is implemented using [Laravel](https://laravel.com/) which is a free and open-source PHP web framework, intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony.
+  -Admin: the admin panel is implemented using [React](https://reactjs.org/) which is a JavaScript library for building user interfaces.
 - For persistent storage (database), the app uses [MySQL](https://www.mysql.com/) for users and [Firebase](https://firebase.google.com/) for Notifications and car location. MySQL is a relational database management system based on SQL – Structured Query Language. Google Firebase is a Google-backed application development software that enables developers to develop iOS, Android and Web apps. Firebase provides tools for tracking analytics, reporting and fixing app crashes, creating marketing and product experiment.
 - To send local push notifications, the app uses the [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/) package which provides an API to fetch push notification tokens and to present, schedule, receive and respond to notifications.
 - For displaying maps and allowing users to see their car's location, the app uses [react-native-maps](https://github.com/react-native-maps/react-native-maps) which is a component system for maps that ships with platform-native code that needs to be compiled together with React Native.
