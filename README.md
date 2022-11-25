@@ -61,7 +61,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -------------------------------------- | ------------------------------------ | --------------------------------------- |
 | <img src="./readme/real-landing.png"/> | <img src="./readme/real-login.png"/> | <img src="./readme/real-register.png"/> |
 
-| Map Screen                         | Profile SCreen                         | Settings Screen                         |
+| Map Screen                         | Profile Screen                         | Settings Screen                         |
 | ---------------------------------- | -------------------------------------- | --------------------------------------- |
 | <img src="./readme/real-map.png"/> | <img src="./readme/real-profile.png"/> | <img src="./readme/real-settings.png"/> |
 
