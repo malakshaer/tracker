@@ -6,7 +6,7 @@ const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState([]);
     const [cars, setCars] = useState([]);
-    const [userImage, setUserImage] = useState();
+    const [profileImage, setProfileImage] = useState();
 
     return (
         <UserContext.Provider
@@ -15,8 +15,8 @@ const UserProvider = ({ children }) => {
                 setUser,
                 cars,
                 setCars,
-                userImage,
-                setUserImage,
+                profileImage,
+                setProfileImage,
             }}
         >
             {children}
