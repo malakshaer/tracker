@@ -4,14 +4,13 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 const CarComponent = ({ carName, pin, onPress }) => {
   return (
-    <TouchableOpacity style={styles.dropDown} onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.carDetails}>
         <Icon style={styles.icon} name={"car"} size={30} color={"#032955"} />
         <View>
           <Text style={styles.textStyle}>Name: {carName}</Text>
           <Text style={styles.textStyle}>PIN: {pin}</Text>
         </View>
-        {/* <Icon name={"checkmark-circle-outline"} size={30} color={"#032955"} /> */}
       </View>
     </TouchableOpacity>
   );
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingHorizontal: 20,
     paddingVertical: 5,
+    color: "#032955",
   },
   icon: {
     textAlignVertical: "center",
