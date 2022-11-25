@@ -61,17 +61,17 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -------------------------------------- | ------------------------------------ | --------------------------------------- |
 | <img src="./readme/real-landing.png"/> | <img src="./readme/real-login.png"/> | <img src="./readme/real-register.png"/> |
 
-| Map Screen                          | Notification Screen                                | Notifications                                |
-| ----------------------------------- | -------------------------------------------------- | -------------------------------------------- |
-| <img src="./readme/real-map.png" /> | <img src="./readme/real-notification-screen.png"/> | <img src="./readme/real-notifications.png"/> |
+| Map Screen                         | Profile SCreen                         | Settings Screen                         |
+| ---------------------------------- | -------------------------------------- | --------------------------------------- |
+| <img src="./readme/real-map.png"/> | <img src="./readme/real-profile.png"/> | <img src="./readme/real-settings.png"/> |
 
-| Profile Screen                         | Edit Profile                                | Add Car                                    |
-| -------------------------------------- | ------------------------------------------- | ------------------------------------------ |
-| <img src="./readme/real-profile.png"/> | <img src="./readme/real-edit-profile.png"/> | <img src="./readme/real-add-vehicle.png"/> |
+| Edit Profile                                | Edit Car                                | Add Car                                |
+| ------------------------------------------- | --------------------------------------- | -------------------------------------- |
+| <img src="./readme/real-edit-profile.png"/> | <img src="./readme/real-edit-car.png"/> | <img src="./readme/real-add-car.png"/> |
 
-| Edit Car                                 | Settings                                 | Settings/Popup                                 |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
-| <img src="./readme/real-edit-car.png" /> | <img src="./readme/real-settings.png" /> | <img src="./readme/real-settings-popup.png" /> |
+| Tracking a car                     | Adding a car                      | Deleting all cars                         |
+| ---------------------------------- | --------------------------------- | ----------------------------------------- |
+| <img src="./readme/map_view.gif"/> | <img src="./readme/add_car.gif"/> | <img src="./readme/delete_vehicles.gif"/> |
 
 <br><br>
 <img src="./readme/title6.svg"/>
