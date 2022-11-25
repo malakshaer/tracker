@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/slices/userSlice";
 import { login } from "../../api/authApi";
 import "localstorage-polyfill";
 import Loading from "../../components/Loading/Loading";
@@ -27,15 +25,19 @@ const LogInScreen = (props: loginScreenProps) => {
 
   const [email, setEmail] = useState("malakshaer@gmail.com");
   const [password, setPassword] = useState("12345678910k");
-  const dispatch = useDispatch();
+  
   const handleLogin = async () => {
     try {
       setLoading(true);
       const res = await login(email, password);
-      dispatch(addUser(res?.data));
-      const user = await AsyncStorage.setItem(
-        "user",
-        JSON.stringify(res?.data)
+      console.log(res.data.authorization.token);
+      console.log(res.data.user);
+      await AsyncStorage.setItem("@token",res.data.authorization.token );
+      
+      
+     await AsyncStorage.setItem(
+        "@user",
+        JSON.stringify(res.data.user)
       );
 
       if (res?.status === 200) {
