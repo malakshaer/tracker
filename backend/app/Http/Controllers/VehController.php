@@ -13,7 +13,6 @@ class CarController extends Controller
         $this->database = \App\Services\FirebaseService::connect();
     }
 
-    //Add Car Details
     //Each car added has a unique key
     public function createNewCar(Request $request)
     {
@@ -72,7 +71,6 @@ class CarController extends Controller
 
         return response()->json('Car has been updated');
     }
-
 
     //Delete Car
     public function deleteCar(Request $request)
