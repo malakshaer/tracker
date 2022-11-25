@@ -22,9 +22,10 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('carName');
-            $table->string('pin');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('pin')->unique();
+            $table->float('longitude');
+            $table->float('latitude');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
