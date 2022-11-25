@@ -4,68 +4,84 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Tymon\JWTAuth\Contracts\Providers\Auth as ProvidersAuth;
 
 class UserController extends Controller
 {
 
-    // //Create a user
-    // public function create(Request $request)
-    // {
-    //     $this->database
-    //         ->getReference('users/')
-    //         ->set([
-    //             'name' => $request['name'],
-    //             'email' => $request['email'],
-    //             'password' => bcrypt($request['password'])
-    //         ]);
-
-    //     return response()->json('User has been created successfully');
-    // }
-
     //Show User Profile
     public function showProfile()
     {
-        return response()->json(auth()->user());
+        $user = Auth::user();
+        return response()->json(
+            [
+                'status' => 200,
+                'user' => $user,
+            ]
+        );
     }
 
     //Edit or update user
     public function editUser(Request $request)
     {
 
-        $user = User::where('id', $request->id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'profile_image' => $request->profile_image
-        ]);
+        $user = Auth::user();
 
-        // $imageName = time().'.'.$request->profile_image->extension();
-
-        // Public Folder
-        // $request->profile_image->move(public_path('images'), $imageName);
-
-        if ($request->encryptedImage) {
-            $image_id = time();
-            $image = base64_decode($request->encryptedImage);
-            $path = public_path('./storage/app/public')  . $image_id . "." . $request->extension;
-            file_put_contents($path, $image);
-            $user->image = $image_id . "." . $request->extension;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $image->move(public_path('/images'), $image_name);
+            $image_path = "/images/" . $image_name;
         }
 
+        $user->update($request->all());
 
         return response()->json(
             [
-                'status' => 200,
-                'message' => 'Profile Updated'
+                'status' => 'success',
+                'user' => $user,
             ]
         );
     }
 
     //Delete User
-    public function deleteAccount($id)
+    public function deleteAccount()
     {
-        User::where('id', $id)->delete();
+        Auth::user()->delete();
 
         return response()->json('Account has been deleted');
+    }
+
+    //Get all users
+    public function getAllUsers()
+    {
+        $users =  User::all();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $users
+        ]);
+
+        return response()->json(["status" => "Error"]);
+    }
+
+    //Get Statistics
+    // public function getStats()
+    // {
+    //     $numberOfUsers = count(User::all());
+    //     $numberOfCars = count(Cars::all());
+    // }
+
+    //Get number of users
+    public function getUserCount()
+    {
+        $users = count(User::all());
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $users
+        ]);
     }
 }
