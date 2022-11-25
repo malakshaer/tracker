@@ -14,6 +14,7 @@ class Car extends Model
         'carName',
         'pin',
         'longitude',
-        'latitude'
+        'latitude',
+        'user_id',
     ];
 }
