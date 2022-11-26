@@ -73,6 +73,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | ---------------------------------- | --------------------------------- | ----------------------------------------- |
 | <img src="./readme/map_view.gif"/> | <img src="./readme/add_car.gif"/> | <img src="./readme/delete_vehicles.gif"/> |
 
+| Admin Panel                           | Admin statistics                      |
+| ------------------------------------- | ------------------------------------- |
+| <img src="./readme/admin-login.png"/> | <img src="./readme/admin-stats.png"/> |
+
 <br><br>
 <img src="./readme/title6.svg"/>
 
