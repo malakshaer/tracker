@@ -34,9 +34,9 @@
 | ------------------------------------------- | ------------------------------------------ | -------------------------------------------- |
 | <img src="./readme/landing.png" width=190/> | <img src="./readme/login.png" width=190 /> | <img src="./readme/register.png" width=190/> |
 
-| Map Screen                                    | Settings Screen                                   | Settings Popup                            |
-| --------------------------------------------- | ------------------------------------------------- | ----------------------------------------- |
-| <img src="./readme/figma-map.png" width=185/> | <img src="./readme/figma-profile.png" width=185/> | <img src="./readme/figma-settings.png" /> |
+| Map Screen                                    | Settings Screen                                   | Settings Popup                                     |
+| --------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| <img src="./readme/figma-map.png" width=185/> | <img src="./readme/figma-profile.png" width=185/> | <img src="./readme/figma-settings.png" width=185/> |
 
 <br><br>
 
