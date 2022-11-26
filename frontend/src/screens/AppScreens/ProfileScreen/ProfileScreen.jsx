@@ -43,6 +43,7 @@ const ProfileScreen = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  //Upload image
   const uploadImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -58,6 +59,7 @@ const ProfileScreen = () => {
     }
   };
 
+  //Edit car by id
   const editCar = async (carName, pin, car_id) => {
     const data = {
       carName,
@@ -77,6 +79,7 @@ const ProfileScreen = () => {
     });
   };
 
+  //Edit Profile
   const handleEditUser = async () => {
     const data = {
       name,
@@ -95,6 +98,7 @@ const ProfileScreen = () => {
     });
   };
 
+  //Show Profile information
   const getProfile = async () => {
     const token = await AsyncStorage.getItem("@token");
 
@@ -105,6 +109,7 @@ const ProfileScreen = () => {
     getProfile();
   });
 
+  //Get the cars of the user
   useEffect(async () => {
     axios({
       method: "GET",
