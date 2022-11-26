@@ -40,7 +40,7 @@ const ProfileScreen = () => {
   const [pin, setPin] = useState("");
 
   const [pressedCar, setPressedCar] = useState({});
-
+  const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const uploadImage = async () => {
@@ -105,8 +105,6 @@ const ProfileScreen = () => {
     getProfile();
   });
 
-  const [cars, setCars] = useState([]);
-
   useEffect(async () => {
     axios({
       method: "GET",
@@ -124,10 +122,6 @@ const ProfileScreen = () => {
     return (
       <View style={styles.container}>
         <View style={styles.containerOne}>
-          {/* <Image
-            source={require("../../../../assets/profile.jpg")}
-            style={{ height: 70, width: 70, borderRadius: 40 }}
-          /> */}
           <Image
             source={{ uri: userImage }}
             style={{ height: 70, width: 70, borderRadius: 40 }}
@@ -263,15 +257,6 @@ const ProfileScreen = () => {
               </TouchableOpacity>
             </View>
             <View>
-              {/* <Image
-                source={require("../../../../assets/profile.jpg")}
-                style={{
-                  height: 70,
-                  width: 70,
-                  borderRadius: 40,
-                  alignSelf: "center",
-                }}
-              /> */}
               <Image
                 source={{ uri: userImage }}
                 style={{
